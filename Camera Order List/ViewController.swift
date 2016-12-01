@@ -5,6 +5,7 @@
 //  Created by Warren Hansen on 11/30/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 //
+//  looking for swifty smart way to populate picker wheel changes
 
 import UIKit
 
@@ -14,7 +15,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBOutlet weak var myLabel: UILabel!
     
-    // Input catagories data into the Array:
     var equipmentArray:[[String]] = [Quantity, Catagory.allValues, Maker.allValues]
     
     override func viewDidLoad() {
@@ -24,11 +24,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.myPicker.delegate = self
     }
 
-    // Mark: - Picker delegates and controls
-    // The number of columns of data
+    // MARK: - Picker delegates and controls
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 3    //equipmentArray.count
     }
+    
     // The number of rows of data
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return equipmentArray[component].count
@@ -38,6 +38,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return equipmentArray[component][row]
     }
+    
     // populate the textbox
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         myLabel.text = "\(Quantity[row]) \(Catagory.allValues[row]) \(Maker.allValues[row])"
