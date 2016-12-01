@@ -9,6 +9,9 @@
 import Foundation
 // Set up objects for camera order from what I learned at Udacity
 //  create un mutable types of equipment objects
+
+let Quantity = ["1","2","3","4","5","6","7","8","9"]
+
 enum Catagory {
     case camera, primes, macros, probeLens, zoomLens, aks, finder, filters, support
     
@@ -17,6 +20,8 @@ enum Catagory {
 
 enum Maker {
     case arri, red, phantom, panavision, sony
+    
+    static let allValues = ["Arri", "Red", "Phantom", "Panavision", "Sony"]
 }
 
 enum Model {
