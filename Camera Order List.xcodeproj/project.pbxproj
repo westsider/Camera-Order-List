@@ -12,6 +12,7 @@
 		0D290A031DEF80EB004EB14A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D290A011DEF80EB004EB14A /* Main.storyboard */; };
 		0D290A051DEF80EB004EB14A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D290A041DEF80EB004EB14A /* Assets.xcassets */; };
 		0D290A081DEF80EB004EB14A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D290A061DEF80EB004EB14A /* LaunchScreen.storyboard */; };
+		0D290A101DEF81AC004EB14A /* Equipment Classes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D290A0F1DEF81AC004EB14A /* Equipment Classes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		0D290A041DEF80EB004EB14A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D290A071DEF80EB004EB14A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D290A091DEF80EB004EB14A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D290A0F1DEF81AC004EB14A /* Equipment Classes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Equipment Classes.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,12 +56,13 @@
 		0D2909FC1DEF80EB004EB14A /* Camera Order List */ = {
 			isa = PBXGroup;
 			children = (
-				0D2909FD1DEF80EB004EB14A /* AppDelegate.swift */,
-				0D2909FF1DEF80EB004EB14A /* ViewController.swift */,
 				0D290A011DEF80EB004EB14A /* Main.storyboard */,
+				0D2909FF1DEF80EB004EB14A /* ViewController.swift */,
+				0D290A0F1DEF81AC004EB14A /* Equipment Classes.swift */,
 				0D290A041DEF80EB004EB14A /* Assets.xcassets */,
 				0D290A061DEF80EB004EB14A /* LaunchScreen.storyboard */,
 				0D290A091DEF80EB004EB14A /* Info.plist */,
+				0D2909FD1DEF80EB004EB14A /* AppDelegate.swift */,
 			);
 			path = "Camera Order List";
 			sourceTree = "<group>";
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D290A001DEF80EB004EB14A /* ViewController.swift in Sources */,
+				0D290A101DEF81AC004EB14A /* Equipment Classes.swift in Sources */,
 				0D2909FE1DEF80EB004EB14A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
