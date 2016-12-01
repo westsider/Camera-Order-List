@@ -12,7 +12,7 @@ import Foundation
 enum Catagory {
     case camera, primes, macros, probeLens, zoomLens, aks, finder, filters, support
     
-    static let allValues = ["Camera", "Primes", "Macros", "ProbecLens", "Zoom Lens", "AKS", "Finder", "Filters", "Support"]
+    static let allValues = ["Camera", "Primes", "Macros", "Probe Lens", "Zoom Lens", "AKS", "Finder", "Filters", "Support"]
 }
 
 enum Maker {

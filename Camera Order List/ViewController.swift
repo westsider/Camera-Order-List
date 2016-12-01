@@ -14,8 +14,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBOutlet weak var myLabel: UILabel!
     
-    // Input data into the Array:
-    var pickerData = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6"]
+    // Input catagory data into the Array:
+    var catagoryData =  Catagory.allValues
+    let quantityData = [ 1,2,3,4,5,6,7,8,9 ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,16 +32,16 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     // The number of rows of data
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
+        return catagoryData.count
     }
     
     // The data to return for the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[row]
+        return catagoryData[row]
     }
     // populate the textbox
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        myLabel.text = pickerData[row]
+        myLabel.text = catagoryData[row]
     }
     
 }
