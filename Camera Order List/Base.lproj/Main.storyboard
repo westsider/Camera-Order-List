@@ -22,20 +22,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E3n-ge-Oib">
-                                <rect key="frame" x="0.0" y="28" width="375" height="216"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="375" id="3n3-pp-PxM"/>
-                                    <constraint firstAttribute="height" constant="216" id="ZaD-0i-rPN"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="89" width="375" height="216"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="z9m-OR-6QM"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="ar4-cm-98Z"/>
                                 </connections>
                             </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity        Catagory        Maker        Model    " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GpE-nZ-F2B">
+                                <rect key="frame" x="0.0" y="52" width="375" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T39-PR-LfP">
-                                <rect key="frame" x="0.0" y="252" width="375" height="31"/>
+                                <rect key="frame" x="0.0" y="328" width="375" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="NEh-ak-VFQ"/>
+                                    <constraint firstAttribute="height" constant="31" id="whE-tt-PpG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -44,12 +46,15 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="T39-PR-LfP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3xd-gz-xf2"/>
-                            <constraint firstItem="T39-PR-LfP" firstAttribute="top" secondItem="E3n-ge-Oib" secondAttribute="bottom" constant="8" id="JtG-as-JAC"/>
-                            <constraint firstAttribute="trailing" secondItem="E3n-ge-Oib" secondAttribute="trailing" id="Wzr-pS-Bmx"/>
-                            <constraint firstItem="E3n-ge-Oib" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="cgS-Gm-fG2"/>
-                            <constraint firstAttribute="trailing" secondItem="T39-PR-LfP" secondAttribute="trailing" id="fSE-OH-rJ2"/>
-                            <constraint firstItem="E3n-ge-Oib" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="h6P-TN-ycz"/>
+                            <constraint firstItem="GpE-nZ-F2B" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="32" id="6XP-Rk-5IV"/>
+                            <constraint firstAttribute="trailing" secondItem="GpE-nZ-F2B" secondAttribute="trailing" id="Ali-Uk-rEU"/>
+                            <constraint firstItem="E3n-ge-Oib" firstAttribute="top" secondItem="GpE-nZ-F2B" secondAttribute="bottom" constant="16" id="JUh-bJ-fXU"/>
+                            <constraint firstItem="E3n-ge-Oib" firstAttribute="trailing" secondItem="T39-PR-LfP" secondAttribute="trailing" id="bXD-FD-NeB"/>
+                            <constraint firstItem="GpE-nZ-F2B" firstAttribute="leading" secondItem="E3n-ge-Oib" secondAttribute="leading" id="iXl-N3-Zjx"/>
+                            <constraint firstItem="T39-PR-LfP" firstAttribute="top" secondItem="E3n-ge-Oib" secondAttribute="bottom" constant="23" id="lEC-aW-MqQ"/>
+                            <constraint firstItem="GpE-nZ-F2B" firstAttribute="trailing" secondItem="E3n-ge-Oib" secondAttribute="trailing" id="sIN-H1-ojg"/>
+                            <constraint firstItem="GpE-nZ-F2B" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="sfq-7N-yfo"/>
+                            <constraint firstItem="E3n-ge-Oib" firstAttribute="leading" secondItem="T39-PR-LfP" secondAttribute="leading" id="xg5-th-0ab"/>
                         </constraints>
                     </view>
                     <connections>
