@@ -103,6 +103,7 @@ func setPickerArray(component: Int, row: Int, lastCatagory: Int)-> [[String]] {
     
     var equipmentArray:[[String]] = [Quantity, Catagory.allValues, MakerCamera.allValues, setCamModel(maker: .arri)]
     
+    if component < 3 {
     switch component {
     //  case 0 is loaded on first run in VC
 
@@ -178,7 +179,8 @@ func setPickerArray(component: Int, row: Int, lastCatagory: Int)-> [[String]] {
         }
         
 
-//    case 3:  //  change Model -- this logic not established yet
+    case 3:  //  change Model -- this logic not established yet
+        break
 //        switch row {
 //        case 0:
 //            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .innovision)]
@@ -198,7 +200,9 @@ func setPickerArray(component: Int, row: Int, lastCatagory: Int)-> [[String]] {
     default:
         break
     }
+    }
     return equipmentArray
+    
 }
 // Set up objects for camera order from what I learned at Udacity
 //  create un mutable types of equipment objects
