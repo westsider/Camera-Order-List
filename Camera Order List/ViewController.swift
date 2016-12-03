@@ -9,6 +9,7 @@
 //
 //  looking for swifty smart way to populate picker wheel changes
 //  fix - reset wheel 2 to 0, when wheel 1 moves
+
 //  populate text box
 //  populate an event when wheel elements selected by add
 
@@ -53,20 +54,23 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         reloadComponentsAndText(component: component, row: row)
         
+        // poplate text feild
+        //  error wrong index
+        // create an event that this is stored in
+        myLabel.text = "\(localPickerIndex[0][myPicker.selectedRow(inComponent: 0)]) \(localPickerIndex[1][myPicker.selectedRow(inComponent: 1)]) \(localPickerIndex[2][myPicker.selectedRow(inComponent: 2)]) \(localPickerIndex[3][myPicker.selectedRow(inComponent: 3)])"
+        
         if component == 1 {
             prevCatagory = row    // if wheel 1 moves save the componennt to pass to setPickerArray
             // with new catagory set wh22l 2 and 3 to index 0
             myPicker.selectRow(0, inComponent: 2, animated: true)
             myPicker.selectRow(0, inComponent: 3, animated: true)
+            //myLabel.text = "\(localPickerIndex[0][row]) \(localPickerIndex[1][row])  \(localPickerIndex[2][0])"
         }
         
     }
     
     // MARK: - call a reload on text in picker UI  depending on the component switched
     func reloadComponentsAndText(component: Int, row: Int) {
-        
-        // out of index error when called
-        // myLabel.text = "\(localPickerIndex[0][row]) \(localPickerIndex[1][row])  \(localPickerIndex[2][row])"
         
         switch component {  // reload only the next picker when prior wheel moves
         case 0:
