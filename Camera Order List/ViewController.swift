@@ -5,8 +5,10 @@
 //  Created by Warren Hansen on 11/30/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 //
+//  Comp 0 = Quantity Comp 1 = Catagory Comp 2 = Maker Comp 3 - Model
+//
 //  looking for swifty smart way to populate picker wheel changes
-//  todo - reset wheel 2 to o, when wheel 1 moves
+//  fix - reset wheel 2 to 0, when wheel 1 moves
 //  populate text box
 //  populate an event when wheel elements selected by add
 
@@ -44,17 +46,18 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return localPickerIndex[component][row]
     }
     
-    // MARK: -  populate the textbox
+    // MARK: - when wheels move change the array and reload
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         localPickerIndex = setPickerArray(component: component, row: row, lastCatagory: prevCatagory)
         
-        print(localPickerIndex)
-        
         reloadComponentsAndText(component: component, row: row)
         
         if component == 1 {
-            prevCatagory = row    // for next time setPickerArray is called
+            prevCatagory = row    // if wheel 1 moves save the componennt to pass to setPickerArray
+            // with new catagory set wh22l 2 and 3 to index 0
+            myPicker.selectRow(0, inComponent: 2, animated: true)
+            myPicker.selectRow(0, inComponent: 3, animated: true)
         }
         
     }
@@ -78,7 +81,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         default:
             break
         }
-
     }
 }
 
