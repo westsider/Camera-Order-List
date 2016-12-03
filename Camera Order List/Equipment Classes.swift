@@ -99,111 +99,132 @@ func setProbeModel(maker: MakerProbe) -> [String] {
     }
 }
 
-func setPickerArray(component: Int, row: Int, lastCatagory: Int)-> [[String]] {
-    
-    var equipmentArray:[[String]] = [Quantity, Catagory.allValues, MakerCamera.allValues, setCamModel(maker: .arri)]
-    
-    if component < 3 {
-    switch component {
-    //  case 0 is loaded on first run in VC
+//class PickerData {
+//    
+//    var equipmentArray:[[String]] = [Quantity, Catagory.allValues, MakerCamera.allValues, setCamModel(maker: .arri)]
+//    
+//    init(equipmentArray: [[String]]) {
+//        self.equipmentArray = equipmentArray
+//    }
 
-    case 1: // change Catagory and maker populates
-        switch row {
-        case 0:
-            equipmentArray = [Quantity, Catagory.allValues, MakerCamera.allValues,setCamModel(maker: .arri)] // cam
-        case 1:
-            equipmentArray = [Quantity, Catagory.allValues, MakerPrimes.allValues,setPrimesModel(maker: .zeiss)] // priome
-        case 2:
-            equipmentArray = [Quantity, Catagory.allValues, MakerMacros.allValues, setMacrosModel(maker: .arri)] // macro
-        case 3:
-            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .innovision)] // probe, zoom, aks,
-        default:
-            equipmentArray = [Quantity, Catagory.allValues, MakerCamera.allValues,["Array ","out ", "of ", "index"]]
-        }
+//  a function to inperpret the picker
+//  then return equipmentArray[Quantity 1, Catagory: Camera, Maker: Arri, Model: Alexa ]
 
-    case 2:  //  Based on Catagory change maker - model populates
-        switch lastCatagory {
-        case 0:     //  prevCatagory = Camera and Maker = Arri
-            switch row {
-            case 0:
-                equipmentArray = [Quantity, Catagory.allValues, MakerCamera.allValues, setCamModel(maker: .arri)]
-            case 1: //  prevCatagory = Camera and Maker = Red
-                equipmentArray = [Quantity, Catagory.allValues, MakerCamera.allValues, setCamModel(maker: .red)]
-            case 2: //  prevCatagory = Camera and Maker = Phantom
-                equipmentArray = [Quantity, Catagory.allValues, MakerCamera.allValues, setCamModel(maker: .phantom)]
-            case 3: //  prevCatagory = Camera and Maker = Panavision
-                equipmentArray = [Quantity, Catagory.allValues, MakerCamera.allValues, setCamModel(maker: .panavision)]
-            default:
-                equipmentArray = [Quantity, Catagory.allValues, MakerCamera.allValues, ["Array ","out ", "of ", "index"]]
-            }
+// what if you create the array in the VC then modify it in the func?
 
-        case 1:     //  prevCatagory = Primes and Maker = Zeiss
-            switch row {
-            case 0:
-                equipmentArray = [Quantity, Catagory.allValues, MakerPrimes.allValues, setPrimesModel(maker: .zeiss)]
-            case 1: //  prevCatagory = Primes and Maker = leics
-                equipmentArray = [Quantity, Catagory.allValues, MakerPrimes.allValues, setPrimesModel(maker: .leica)]
-            case 2: //  prevCatagory = Primes and Maker = cannon
-                equipmentArray = [Quantity, Catagory.allValues, MakerPrimes.allValues, setPrimesModel(maker: .canon)]
-            case 3: //  prevCatagory = Primes and Maker = cooke
-                equipmentArray = [Quantity, Catagory.allValues, MakerPrimes.allValues, setPrimesModel(maker: .cooke)]
-            default:
-                equipmentArray = [Quantity, Catagory.allValues, MakerPrimes.allValues, ["Array ","out ", "of ", "index"]]
-            }
-            
-        case 2:     //  prevCatagory = Macros and Maker = Arri || Zeiss
-            switch row {
-            case 0:
-                equipmentArray = [Quantity, Catagory.allValues, MakerMacros.allValues, setMacrosModel(maker: .arri)]
-            case 1: //  prevCatagory = Macros and Maker = Zeiss
-                equipmentArray = [Quantity, Catagory.allValues, MakerMacros.allValues, setMacrosModel(maker: .zeiss)]
-            default:
-                equipmentArray = [Quantity, Catagory.allValues, MakerMacros.allValues, ["Array ","out ", "of ", "index"]]
-            }
-            
-        case 3:     //  prevCatagory = ProbeLens and Maker = Innovision || T-Rex || Revolution || Skater
-            switch row {
-            case 0:
-                equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .innovision)]
-            case 1: //  prevCatagory = ProbeLens and Maker = T-Rex
-                equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .tRex)]
-            case 2: //  prevCatagory = ProbeLens and Maker = Revolution
-                equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .revolution)]
-            case 3: //  prevCatagory = ProbeLens and Maker = Skater
-                equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .skater)]
-            default:
-                equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, ["Array ","out ", "of ", "index"]]
-            }
-        default:
-            break
-        }
+//  then pass equipmentArray[] to tableview
+//  and then pass and array of equipmentArray[] to the Event
+//  then email the event and store it persistently
+//  this func works great till I get to wheel 4, then it re installs the default camera arri alexa
+
+    func setPickerArray(component: Int, row: Int, lastCatagory: Int ) -> [[String]]  {
         
+        var equipmentArray:[[String]] = [Quantity, Catagory.allValues, MakerCamera.allValues, setCamModel(maker: .arri)]
+        
+        if component < 3 {
+            switch component {
+                //  case 0 is loaded on first run in VC
+                
+            case 1: // change Catagory and maker populates
+                switch row {
+                case 0:
+                    equipmentArray = [Quantity, Catagory.allValues, MakerCamera.allValues,setCamModel(maker: .arri)] // cam
+                case 1:
+                    equipmentArray = [Quantity, Catagory.allValues, MakerPrimes.allValues,setPrimesModel(maker: .zeiss)] // priome
+                case 2:
+                    equipmentArray = [Quantity, Catagory.allValues, MakerMacros.allValues, setMacrosModel(maker: .arri)] // macro
+                case 3:
+                    equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .innovision)] // probe, zoom, aks,
+                default:
+                    equipmentArray = [Quantity, Catagory.allValues, MakerCamera.allValues,["Array ","out ", "of ", "index"]]
+                }
+                
+            case 2:  //  Based on Catagory change maker - model populates
+                switch lastCatagory {
+                case 0:     //  prevCatagory = Camera and Maker = Arri
+                    switch row {
+                    case 0:
+                        equipmentArray = [Quantity, Catagory.allValues, MakerCamera.allValues, setCamModel(maker: .arri)]
+                    case 1: //  prevCatagory = Camera and Maker = Red
+                        equipmentArray = [Quantity, Catagory.allValues, MakerCamera.allValues, setCamModel(maker: .red)]
+                    case 2: //  prevCatagory = Camera and Maker = Phantom
+                        equipmentArray = [Quantity, Catagory.allValues, MakerCamera.allValues, setCamModel(maker: .phantom)]
+                    case 3: //  prevCatagory = Camera and Maker = Panavision
+                        equipmentArray = [Quantity, Catagory.allValues, MakerCamera.allValues, setCamModel(maker: .panavision)]
+                    default:
+                        equipmentArray = [Quantity, Catagory.allValues, MakerCamera.allValues, ["Array ","out ", "of ", "index"]]
+                    }
+                    
+                case 1:     //  prevCatagory = Primes and Maker = Zeiss
+                    switch row {
+                    case 0:
+                        equipmentArray = [Quantity, Catagory.allValues, MakerPrimes.allValues, setPrimesModel(maker: .zeiss)]
+                    case 1: //  prevCatagory = Primes and Maker = leics
+                        equipmentArray = [Quantity, Catagory.allValues, MakerPrimes.allValues, setPrimesModel(maker: .leica)]
+                    case 2: //  prevCatagory = Primes and Maker = cannon
+                        equipmentArray = [Quantity, Catagory.allValues, MakerPrimes.allValues, setPrimesModel(maker: .canon)]
+                    case 3: //  prevCatagory = Primes and Maker = cooke
+                        equipmentArray = [Quantity, Catagory.allValues, MakerPrimes.allValues, setPrimesModel(maker: .cooke)]
+                    default:
+                        equipmentArray = [Quantity, Catagory.allValues, MakerPrimes.allValues, ["Array ","out ", "of ", "index"]]
+                    }
+                    
+                case 2:     //  prevCatagory = Macros and Maker = Arri || Zeiss
+                    switch row {
+                    case 0:
+                        equipmentArray = [Quantity, Catagory.allValues, MakerMacros.allValues, setMacrosModel(maker: .arri)]
+                    case 1: //  prevCatagory = Macros and Maker = Zeiss
+                        equipmentArray = [Quantity, Catagory.allValues, MakerMacros.allValues, setMacrosModel(maker: .zeiss)]
+                    default:
+                        equipmentArray = [Quantity, Catagory.allValues, MakerMacros.allValues, ["Array ","out ", "of ", "index"]]
+                    }
+                    
+                case 3:     //  prevCatagory = ProbeLens and Maker = Innovision || T-Rex || Revolution || Skater
+                    switch row {
+                    case 0:
+                        equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .innovision)]
+                    case 1: //  prevCatagory = ProbeLens and Maker = T-Rex
+                        equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .tRex)]
+                    case 2: //  prevCatagory = ProbeLens and Maker = Revolution
+                        equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .revolution)]
+                    case 3: //  prevCatagory = ProbeLens and Maker = Skater
+                        equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .skater)]
+                    default:
+                        equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, ["Array ","out ", "of ", "index"]]
+                    }
+                default:
+                    break
+                }
+                
+                
+            case 3:  //  change Model -- this logic not needed because wheel 1 and 2 populate wheel 3
+                break
+                //        switch row {
+                //        case 0:
+                //            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .innovision)]
+                //        case 1:
+                //            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .tRex)]
+                //        case 2:
+                //            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .revolution)]
+                //        case 3:
+                //            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .skater)]
+                //        case 4:
+                //            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .century)]
+                //        case 5:
+                //            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .optex)]
+                //        default:
+                //            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, ["Array ","out ", "of ", "index"]]
+            //        }
+            default:
+                break
+            }
+            }
+        return equipmentArray
+        
+    }
+//}
 
-    case 3:  //  change Model -- this logic not established yet
-        break
-//        switch row {
-//        case 0:
-//            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .innovision)]
-//        case 1:
-//            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .tRex)]
-//        case 2:
-//            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .revolution)]
-//        case 3:
-//            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .skater)]
-//        case 4:
-//            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .century)]
-//        case 5:
-//            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .optex)]
-//        default:
-//            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, ["Array ","out ", "of ", "index"]]
-//        }
-    default:
-        break
-    }
-    }
-    return equipmentArray
-    
-}
+
 // Set up objects for camera order from what I learned at Udacity
 //  create un mutable types of equipment objects
 

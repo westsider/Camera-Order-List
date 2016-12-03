@@ -6,6 +6,9 @@
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 //
 //  looking for swifty smart way to populate picker wheel changes
+//  todo - reset wheel 2 to o, when wheel 1 moves
+//  populate text box
+//  populate an event when wheel elements selected by add
 
 import UIKit
 
@@ -14,8 +17,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var myPicker: UIPickerView!
     
     @IBOutlet weak var myLabel: UILabel!
-    
-    //var equipmentArray:[[String]] = [Quantity, Catagory.allValues, Maker.allValues]
     
     var prevCatagory = 0
     
@@ -43,31 +44,41 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return localPickerIndex[component][row]
     }
     
-    // populate the textbox
+    // MARK: -  populate the textbox
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        localPickerIndex = setPickerArray(component: component, row: row, lastCatagory: prevCatagory
-        )
+        localPickerIndex = setPickerArray(component: component, row: row, lastCatagory: prevCatagory)
+        
         print(localPickerIndex)
-        reloadComponentsAndText()
+        
+        reloadComponentsAndText(component: component, row: row)
+        
         if component == 1 {
             prevCatagory = row    // for next time setPickerArray is called
         }
         
-       // myLabel.text = "\(Quantity[row]) \(Catagory.allValues[row]) \(Maker.allValues[row])"
     }
     
-    // MARK: - call a reload on text in picker UI   savedCompZero
-    func reloadComponentsAndText() {
-       // print("\(savedCompZero)    \(savedCompOne)    \(savedCompTwo)")
+    // MARK: - call a reload on text in picker UI  depending on the component switched
+    func reloadComponentsAndText(component: Int, row: Int) {
         
-       // myLabel.text.text = "\(localPickerIndex[0][savedCompZero]) \(localPickerIndex[1][savedCompOne])  \(localPickerIndex[2][savedCompTwo])"
-        //textDisplay.adjustsFontSizeToFitWidth = true // adjust width of selection
+        // out of index error when called
+        // myLabel.text = "\(localPickerIndex[0][row]) \(localPickerIndex[1][row])  \(localPickerIndex[2][row])"
         
-        myPicker.reloadComponent(0)
-        myPicker.reloadComponent(1)
-        myPicker.reloadComponent(2)
-        myPicker.reloadComponent(3)
+        switch component {  // reload only the next picker when prior wheel moves
+        case 0:
+            break //  dont reload
+        case 1:
+            myPicker.reloadComponent(2)
+            myPicker.reloadComponent(3)
+        case 2:
+            myPicker.reloadComponent(3)
+        case 3:
+            break    //  dont reload
+        default:
+            break
+        }
+
     }
 }
 
