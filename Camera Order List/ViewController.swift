@@ -12,8 +12,8 @@
 //  FIX: - error when comp 3 moves wrong model on comp 3
 //  populate text box
 
-//  create an event object
-//  populate an event object when wheel elements selected by add
+//  create an equipment object
+//  populate an event equipment with wheel elements selected by add IBFunction
 
 import UIKit
 
@@ -49,30 +49,24 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return localPickerIndex[component][row]
     }
     
-    // MARK: - when wheels move change the array and reload
+    // MARK: - when picker wheels move change the pickerArray and reload
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        if component != 3 {     // dont reload index when comp 3 moves
-           localPickerIndex = setPickerArray(component: component, row: row, lastCatagory: prevCatagory)
-        }
-        
+        //  dont reload index when component 3 moves
+        dontReloadOnComp3(component: component, row: row, lastCatagory: prevCatagory)
         
         reloadComponentsAndText(component: component, row: row)
         
-        if component == 1 {
-            prevCatagory = row    // if wheel 1 moves save the componennt to pass to setPickerArray
-            // with new catagory set wh22l 2 and 3 to index 0
-            myPicker.selectRow(0, inComponent: 2, animated: true)
-            myPicker.selectRow(0, inComponent: 3, animated: true)
-            //myLabel.text = "\(localPickerIndex[0][row]) \(localPickerIndex[1][row])  \(localPickerIndex[2][0])"
-        }
+        // zero the picker wheels when Cztagory changes
+        zeroThePicker(component: component, row: row)
         
-        // TODO: - create an event that this is stored in
+        // TODO: - create an equipment event that this is stored in
         myLabel.text = "\(localPickerIndex[0][myPicker.selectedRow(inComponent: 0)]) \(localPickerIndex[1][myPicker.selectedRow(inComponent: 1)]) \(localPickerIndex[2][myPicker.selectedRow(inComponent: 2)]) \(localPickerIndex[3][myPicker.selectedRow(inComponent: 3)])"
         print(localPickerIndex[3])
         
     }
     
+    // MARK: - Picker Convience Functions
     // MARK: - call a reload on text in picker UI  depending on the component switched
     func reloadComponentsAndText(component: Int, row: Int) {
         
@@ -88,6 +82,24 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             break    //  dont reload
         default:
             break
+        }
+    }
+    
+    //  dont reload index when component 3 moves
+    func dontReloadOnComp3(component: Int, row: Int, lastCatagory: Int) {
+        if component != 3 {     // dont reload index when comp 3 moves
+            localPickerIndex = setPickerArray(component: component, row: row, lastCatagory: prevCatagory)
+        }
+    }
+    
+    // zero the picker wheels when Catagory changes
+    func zeroThePicker(component: Int, row: Int){
+        if component == 1 {  // with new catagory set wheel 2 and 3 safely to index 0
+            
+            myPicker.selectRow(0, inComponent: 2, animated: true)
+            myPicker.selectRow(0, inComponent: 3, animated: true)
+            
+            prevCatagory = row    // if wheel 1 moves save the componennt to pass to setPickerArray
         }
     }
 }

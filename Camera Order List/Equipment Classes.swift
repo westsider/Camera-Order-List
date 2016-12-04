@@ -204,31 +204,9 @@ func setPickerArray(component: Int, row: Int, lastCatagory: Int ) -> [[String]] 
     return equipmentArray
     
 }
-//}
 
 
-// Set up objects for camera order from what I learned at Udacity
-//  create un mutable types of equipment objects
-
-//let Quantity = ["1","2","3","4","5","6","7","8","9"]
-//
-//enum Catagory {
-//    case camera, primes, macros, probeLens, zoomLens, aks, finder, filters, support
-//
-//    static let allValues = ["Camera", "Primes", "Macros", "Probe Lens", "Zoom Lens", "AKS", "Finder", "Filters", "Support"]
-//}
-//
-//enum Maker {
-//    case arri, red, phantom, panavision, sony
-//
-//    static let allValues = ["Arri", "Red", "Phantom", "Panavision", "Sony"]
-//}
-//
-//enum Model {
-//    case alexa, alexaXT, red, phantom, dragon
-//}
-//
-////  create a mutable equipment order object
+//  create a mutable equipment order object
 //class Equipment {
 //    var quantity: Int       //  1
 //    var catagory: Catagory          //  Camera       Prime, Macro, Probe, Zoom
@@ -244,7 +222,7 @@ func setPickerArray(component: Int, row: Int, lastCatagory: Int ) -> [[String]] 
 //        self.kit = kit
 //    }
 //}
-//
+
 //class User {
 //    var name: String
 //    var production: String
