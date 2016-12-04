@@ -9,9 +9,11 @@
 //
 //  looking for swifty smart way to populate picker wheel changes
 //  fix - reset wheel 2 to 0, when wheel 1 moves
-
+//  FIX: - error when comp 3 moves wrong model on comp 3
 //  populate text box
-//  populate an event when wheel elements selected by add
+
+//  create an event object
+//  populate an event object when wheel elements selected by add
 
 import UIKit
 
@@ -50,14 +52,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     // MARK: - when wheels move change the array and reload
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        localPickerIndex = setPickerArray(component: component, row: row, lastCatagory: prevCatagory)
+        if component != 3 {     // dont reload index when comp 3 moves
+           localPickerIndex = setPickerArray(component: component, row: row, lastCatagory: prevCatagory)
+        }
+        
         
         reloadComponentsAndText(component: component, row: row)
-        
-        // poplate text feild
-        //  error wrong index
-        // create an event that this is stored in
-        myLabel.text = "\(localPickerIndex[0][myPicker.selectedRow(inComponent: 0)]) \(localPickerIndex[1][myPicker.selectedRow(inComponent: 1)]) \(localPickerIndex[2][myPicker.selectedRow(inComponent: 2)]) \(localPickerIndex[3][myPicker.selectedRow(inComponent: 3)])"
         
         if component == 1 {
             prevCatagory = row    // if wheel 1 moves save the componennt to pass to setPickerArray
@@ -66,6 +66,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             myPicker.selectRow(0, inComponent: 3, animated: true)
             //myLabel.text = "\(localPickerIndex[0][row]) \(localPickerIndex[1][row])  \(localPickerIndex[2][0])"
         }
+        
+        // TODO: - create an event that this is stored in
+        myLabel.text = "\(localPickerIndex[0][myPicker.selectedRow(inComponent: 0)]) \(localPickerIndex[1][myPicker.selectedRow(inComponent: 1)]) \(localPickerIndex[2][myPicker.selectedRow(inComponent: 2)]) \(localPickerIndex[3][myPicker.selectedRow(inComponent: 3)])"
+        print(localPickerIndex[3])
         
     }
     
