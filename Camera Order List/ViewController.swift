@@ -11,9 +11,13 @@
 //  fix - reset wheel 2 to 0, when wheel 1 moves
 //  FIX: - error when comp 3 moves wrong model on comp 3
 //  populate text box
-
 //  create an equipment object
 //  populate an event equipment with wheel elements selected by add IBFunction
+//  clean up picker func
+
+//  find wheel 1 causes equip array to default to arri alexa
+//  populate text field and array
+//  clean filter
 
 import UIKit
 
@@ -27,11 +31,22 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var localPickerIndex = setPickerArray(component: 0, row: 0, lastCatagory: 0)
     
+    var equipment = [String]()
+    
+    var defaultUser = User(name: "Warren Hansen", production: "Nike", company: "CO3", city: "SantaMonica", date: "12 / 20 / 2016", weather: "Sunny 72")
+    
+    // MARK: - Lifecycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.myPicker.dataSource = self
         self.myPicker.delegate = self
+        
+        var thisEvent = Event(user: defaultUser, equipment: [equipment])
+        print("Add instance of Event:")
+        print(thisEvent.user.name + " " + thisEvent.user.production)
+        
+      
     }
 
     // MARK: - Picker delegates and controls
@@ -52,7 +67,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     // MARK: - when picker wheels move change the pickerArray and reload
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        //  dont reload index when component 3 moves
+        //  dont reload localPickerIndex when component 3 move
         dontReloadOnComp3(component: component, row: row, lastCatagory: prevCatagory)
         
         reloadComponentsAndText(component: component, row: row)
@@ -60,13 +75,39 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         // zero the picker wheels when Cztagory changes
         zeroThePicker(component: component, row: row)
         
-        // TODO: - create an equipment event that this is stored in
-        myLabel.text = "\(localPickerIndex[0][myPicker.selectedRow(inComponent: 0)]) \(localPickerIndex[1][myPicker.selectedRow(inComponent: 1)]) \(localPickerIndex[2][myPicker.selectedRow(inComponent: 2)]) \(localPickerIndex[3][myPicker.selectedRow(inComponent: 3)])"
-        print(localPickerIndex[3])
-        
+        // fill the equipoment array and text field from picker choices
+        populateEquipmentArray(component: component, row: row)
     }
     
+    // create an array of equipment from picker
+    func populateEquipmentArray(component: Int, row: Int) {
+        let comp0 = localPickerIndex[0][myPicker.selectedRow(inComponent: 0)]
+        let comp1 = localPickerIndex[1][myPicker.selectedRow(inComponent: 1)]
+        let comp2 = localPickerIndex[2][myPicker.selectedRow(inComponent: 2)]
+        let comp3 = localPickerIndex[3][myPicker.selectedRow(inComponent: 3)]
+        equipment = [comp0, comp1, comp2, comp3]
+        
+        var equipString: String = ""
+        
+        for item in equipment {
+            equipString += item
+            equipString +=  " "
+        }
+        
+        myLabel.text = equipString
+    }
+    
+    @IBAction func addEquipmentAction(_ sender: Any) {
+    
+        thisEvent.equipment.append(equipment)
+        print("Added Equipment to Event:")
+        print(thisEvent.user.name + " " + thisEvent.user.production)
+        print(thisEvent.equipment)
+    }
+    
+    
     // MARK: - Picker Convience Functions
+    
     // MARK: - call a reload on text in picker UI  depending on the component switched
     func reloadComponentsAndText(component: Int, row: Int) {
         

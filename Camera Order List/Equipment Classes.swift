@@ -39,6 +39,45 @@ enum MakerProbe {
     static let allValues = ["Innovision", "T-Rex", "Revolution", "Skater", "Century", "Optex"]
 }
 
+class Maker {
+    var makerCamera: MakerCamera
+    var makerPrimes: MakerPrimes
+    var makerMacros: MakerMacros
+    var makerProbes: MakerProbe
+    
+    init(makerCamera: MakerCamera, makerPrimes: MakerPrimes, makerMacros: MakerMacros, makerProbes: MakerProbe ) {
+        self.makerCamera = makerCamera
+        self.makerPrimes = makerPrimes
+        self.makerMacros = makerMacros
+        self.makerProbes = makerProbes
+    }
+}
+
+//  create a mutable equipment order object
+// I dont thinbk i need an equipment class because it comes out of the set picker array func
+class Equipment {
+    var quantity: Int       //  1
+    var catagory: Catagory          //  Camera       Prime, Macro, Probe, Zoom
+    var maker: Maker        //  Arri         Zeiss
+    var model: String        //  Alexa XT     Master Prime
+    var kit: Array<String> = Array()   //  Nil          12mm, 14mm, 16mm ect
+    
+        init(quantity: Int, catagory: Catagory,
+             maker: Maker,
+             model: String,
+             kit: Array<String>) {
+            self.quantity = quantity
+            self.catagory = catagory
+            self.maker = maker
+            self.model = model
+            self.kit = kit
+
+        }
+}
+
+
+
+
 func setCamModel(maker: MakerCamera) -> [String] {
     switch maker {
     case .arri:
@@ -206,47 +245,56 @@ func setPickerArray(component: Int, row: Int, lastCatagory: Int ) -> [[String]] 
 }
 
 
-//  create a mutable equipment order object
-//class Equipment {
-//    var quantity: Int       //  1
-//    var catagory: Catagory          //  Camera       Prime, Macro, Probe, Zoom
-//    var maker: Maker        //  Arri         Zeiss
-//    var model: Model        //  Alexa XT     Master Prime
-//    var kit: Array<String> = Array()   //  Nil          12mm, 14mm, 16mm ect
-//
-//    init(quantity: Int, catagory: Catagory, maker: Maker, model: Model, kit: Array<String>) {
-//        self.quantity = quantity
-//        self.catagory = catagory
-//        self.maker = maker
-//        self.model = model
-//        self.kit = kit
-//    }
-//}
 
-//class User {
-//    var name: String
-//    var production: String
-//    var company: String
-//    var city: String
-//    var date: String
-//    var weather: String
-//    //var logo: NSData
-//    init(name: String, production: String, company: String, city: String, date: String, weather: String) {
-//        self.name = name
-//        self.production = production
-//        self.company = company
-//        self.city = city
-//        self.date = date
-//        self.weather = weather
-//    }
-//}
-//
-//class Event {
-//    var user: User
-//    var equipment: Equipment
-//
-//    init(user: User, equipment: Equipment){
-//        self.user = user
-//        self.equipment = equipment
-//    }
-//}
+
+class User {
+    var name: String
+    var production: String
+    var company: String
+    var city: String
+    var date: String
+    var weather: String
+    //var logo: NSData
+    init(name: String, production: String, company: String, city: String, date: String, weather: String) {
+        self.name = name
+        self.production = production
+        self.company = company
+        self.city = city
+        self.date = date
+        self.weather = weather
+    }
+}
+
+class Event {
+    var user: User
+    var equipment = [[String]]()
+
+    init(user: User, equipment: [[String]]){
+        self.user = user
+        self.equipment = equipment
+    }
+}
+
+var defaultUser = User(name: "Warren Hansen", production: "Nike", company: "CO3", city: "SantaMonica", date: "12 / 20 / 2016", weather: "Sunny 72")
+
+var equipment = [String]()
+
+var thisEvent = Event(user: defaultUser, equipment: [equipment])
+
+// having trouble getting this to work in my view controller - add button
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
