@@ -21,12 +21,14 @@
 
 import UIKit
 
+
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var myPicker: UIPickerView!
     
     @IBOutlet weak var myLabel: UILabel!
     
+    // MARK - Decalare User array and Event
     var prevCatagory = 0
     
     var localPickerIndex = setPickerArray(component: 0, row: 0, lastCatagory: 0)
@@ -35,6 +37,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var defaultUser = User(name: "Warren Hansen", production: "Nike", company: "CO3", city: "SantaMonica", date: "12 / 20 / 2016", weather: "Sunny 72")
     
+    var thisEvent: Event? = nil
+    
+    //var thisEvent = Event(user: defaultUser, equipment: [equipment])
+    
     // MARK: - Lifecycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +48,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.myPicker.dataSource = self
         self.myPicker.delegate = self
         
-        var thisEvent = Event(user: defaultUser, equipment: [equipment])
+        thisEvent = Event(user: defaultUser, equipment: [equipment])
         print("Add instance of Event:")
-        print(thisEvent.user.name + " " + thisEvent.user.production)
-        
+        print((thisEvent?.user.name)! + " " + (thisEvent?.user.production)!)
       
     }
 
@@ -99,10 +104,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBAction func addEquipmentAction(_ sender: Any) {
     
-        thisEvent.equipment.append(equipment)
+        self.thisEvent?.equipment.append(equipment)
         print("Added Equipment to Event:")
-        print(thisEvent.user.name + " " + thisEvent.user.production)
-        print(thisEvent.equipment)
+        print((thisEvent?.user.name)! + " " + (thisEvent?.user.production)!)
+        print(thisEvent?.equipment)
     }
     
     
