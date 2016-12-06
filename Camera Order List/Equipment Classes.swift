@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 let Quantity = ["1","2","3","4","5","6","7","8","9"]
 
 enum Catagory {
@@ -52,28 +53,6 @@ class Maker {
         self.makerProbes = makerProbes
     }
 }
-
-//  create a mutable equipment order object
-// I dont thinbk i need an equipment class because it comes out of the set picker array func
-//class Equipment {
-//    var quantity: Int       //  1
-//    var catagory: Catagory          //  Camera       Prime, Macro, Probe, Zoom
-//    var maker: Maker        //  Arri         Zeiss
-//    var model: String        //  Alexa XT     Master Prime
-//    var kit: Array<String> = Array()   //  Nil          12mm, 14mm, 16mm ect
-//    
-//        init(quantity: Int, catagory: Catagory,
-//             maker: Maker,
-//             model: String,
-//             kit: Array<String>) {
-//            self.quantity = quantity
-//            self.catagory = catagory
-//            self.maker = maker
-//            self.model = model
-//            self.kit = kit
-//
-//        }
-//}
 
 func setCamModel(maker: MakerCamera) -> [String] {
     switch maker {
@@ -214,31 +193,14 @@ func setPickerArray(component: Int, row: Int, lastCatagory: Int ) -> [[String]] 
                 break
             }
             
-            
         case 3:  //  change Model -- this logic not needed because wheel 1 and 2 populate wheel 3
             break
-            //        switch row {
-            //        case 0:
-            //            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .innovision)]
-            //        case 1:
-            //            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .tRex)]
-            //        case 2:
-            //            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .revolution)]
-            //        case 3:
-            //            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .skater)]
-            //        case 4:
-            //            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .century)]
-            //        case 5:
-            //            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, setProbeModel(maker: .optex)]
-            //        default:
-            //            equipmentArray = [Quantity, Catagory.allValues, MakerProbe.allValues, ["Array ","out ", "of ", "index"]]
-        //        }
+
         default:
             break
         }
     }
     return equipmentArray
-    
 }
 
 class User {
@@ -267,15 +229,9 @@ class Event {
         self.user = user
         self.equipment = equipment
     }
+    
 }
 
-//var defaultUser = User(name: "Warren Hansen", production: "Nike", company: "CO3", city: "SantaMonica", date: "12 / 20 / 2016", weather: "Sunny 72")
-//
-//var equipment = [String]()
-//
-//var thisEvent = Event(user: defaultUser, equipment: [equipment])
-
-// having trouble getting this to work in my view controller - add button
 
 
 

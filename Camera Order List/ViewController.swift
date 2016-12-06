@@ -17,18 +17,21 @@
 //  populate text field and array
 //  Fixed Event object
 //  find wheel 1 causes equip array to default to arri alexa
-
 //  add equipment array to thisEvent.Equipment
+
 //  add tableview
-//  add thisEvene.User and thisEvent.Equipment to tableView
+//  add thisEvent.User and thisEvent.Equipment to tableView
+//  smaller pickerwheel text - or fit to size
 
 import UIKit
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var myPicker: UIPickerView!
     
     @IBOutlet weak var myLabel: UILabel!
+    
+    @IBOutlet weak var myTableView: UITableView!
     
     // MARK - Decalare User array and Event
     var prevCatagory = 0
@@ -39,7 +42,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var defaultUser = User(name: "Warren Hansen", production: "Nike", company: "CO3", city: "SantaMonica", date: "12 / 20 / 2016", weather: "Sunny 72")
     
-    var thisEvent: Event!   //  ? = nil
+    var thisEvent: Event!   //  ? = nil until View Did Load
     
     // MARK: - Lifecycle Functions
     override func viewDidLoad() {
@@ -153,5 +156,34 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             prevCatagory = row    // if wheel 1 moves save the componennt to pass to setPickerArray
         }
     }
+    
+    // MARK: Set up Table View
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
+        
+        cell.textLabel?.text = "Test Cell"
+        
+        return cell
+    }
+    
+    
+    
+    
+    
+    
+    
 }
+
+
+
+
+
+
+
+
 
