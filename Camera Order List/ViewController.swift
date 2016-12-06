@@ -14,9 +14,10 @@
 //  create an equipment object
 //  populate an event equipment with wheel elements selected by add IBFunction
 //  clean up picker func
+//  populate text field and array
+//  Fixed Event object
 
 //  find wheel 1 causes equip array to default to arri alexa
-//  populate text field and array
 //  clean filter
 
 import UIKit
@@ -37,9 +38,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var defaultUser = User(name: "Warren Hansen", production: "Nike", company: "CO3", city: "SantaMonica", date: "12 / 20 / 2016", weather: "Sunny 72")
     
-    var thisEvent: Event? = nil
-    
-    //var thisEvent = Event(user: defaultUser, equipment: [equipment])
+    var thisEvent: Event!   //  ? = nil
     
     // MARK: - Lifecycle Functions
     override func viewDidLoad() {
@@ -50,7 +49,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         thisEvent = Event(user: defaultUser, equipment: [equipment])
         print("Add instance of Event:")
-        print((thisEvent?.user.name)! + " " + (thisEvent?.user.production)!)
+        print((thisEvent.user.name) + " " + (thisEvent.user.production))
       
     }
 
@@ -104,10 +103,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBAction func addEquipmentAction(_ sender: Any) {
     
-        self.thisEvent?.equipment.append(equipment)
+        self.thisEvent.equipment.append(equipment)
         print("Added Equipment to Event:")
-        print((thisEvent?.user.name)! + " " + (thisEvent?.user.production)!)
-        print(thisEvent?.equipment)
+        print((thisEvent.user.name) + " " + (thisEvent.user.production))
+        print(thisEvent.equipment)
     }
     
     
