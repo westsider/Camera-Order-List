@@ -16,12 +16,13 @@
 //  clean up picker func
 //  populate text field and array
 //  Fixed Event object
-
 //  find wheel 1 causes equip array to default to arri alexa
-//  clean filter
+
+//  add equipment array to thisEvent.Equipment
+//  add tableview
+//  add thisEvene.User and thisEvent.Equipment to tableView
 
 import UIKit
-
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -71,12 +72,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     // MARK: - when picker wheels move change the pickerArray and reload
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        //  dont reload localPickerIndex when component 3 move
-        dontReloadOnComp3(component: component, row: row, lastCatagory: prevCatagory)
+        //  dont reload localPickerIndex when component 0 or 3 move
+        dontReloadOnComp1or3(component: component, row: row, lastCatagory: prevCatagory)
         
         reloadComponentsAndText(component: component, row: row)
         
-        // zero the picker wheels when Cztagory changes
+        // zero the picker wheels when Catagory changes
         zeroThePicker(component: component, row: row)
         
         // fill the equipoment array and text field from picker choices
@@ -85,19 +86,21 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     // create an array of equipment from picker
     func populateEquipmentArray(component: Int, row: Int) {
+        // find which rows are selected in each component
         let comp0 = localPickerIndex[0][myPicker.selectedRow(inComponent: 0)]
         let comp1 = localPickerIndex[1][myPicker.selectedRow(inComponent: 1)]
         let comp2 = localPickerIndex[2][myPicker.selectedRow(inComponent: 2)]
         let comp3 = localPickerIndex[3][myPicker.selectedRow(inComponent: 3)]
+        
+         // populate the array for label verification and addition to the event
         equipment = [comp0, comp1, comp2, comp3]
         
+        // loop through the equipment array and populate the label
         var equipString: String = ""
-        
         for item in equipment {
-            equipString += item
-            equipString +=  " "
+            equipString += item + " "
         }
-        
+        // send this equipment string to the label
         myLabel.text = equipString
     }
     
@@ -117,22 +120,27 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         switch component {  // reload only the next picker when prior wheel moves
         case 0:
-            break //  dont reload
+            break           //  dont reload because quantity changes
         case 1:
             myPicker.reloadComponent(2)
             myPicker.reloadComponent(3)
         case 2:
             myPicker.reloadComponent(3)
         case 3:
-            break    //  dont reload
+            break           //  dont reload becuase only the model changed
         default:
             break
         }
     }
     
-    //  dont reload index when component 3 moves
-    func dontReloadOnComp3(component: Int, row: Int, lastCatagory: Int) {
-        if component != 3 {     // dont reload index when comp 3 moves
+    //  dont reload localPickerIndex when component 0 or 3 move
+    func dontReloadOnComp1or3(component: Int, row: Int, lastCatagory: Int) {
+        if component == 0 {
+            // only update the quantity
+            localPickerIndex[0][0]  = String(myPicker.selectedRow(inComponent: 0))
+        }
+        
+        if component == 1 || component == 2 {     //  full update on comp 1 and 2 only
             localPickerIndex = setPickerArray(component: component, row: row, lastCatagory: prevCatagory)
         }
     }
@@ -140,10 +148,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     // zero the picker wheels when Catagory changes
     func zeroThePicker(component: Int, row: Int){
         if component == 1 {  // with new catagory set wheel 2 and 3 safely to index 0
-            
             myPicker.selectRow(0, inComponent: 2, animated: true)
             myPicker.selectRow(0, inComponent: 3, animated: true)
-            
             prevCatagory = row    // if wheel 1 moves save the componennt to pass to setPickerArray
         }
     }
