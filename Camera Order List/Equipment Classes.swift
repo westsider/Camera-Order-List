@@ -233,10 +233,27 @@ class Event {
 }
 
 
+//  need a func to make labels in table view
+//  Quantity Catagory maker Model
+//  Quantity Catagory = cell.textLabel?.text = "The Title"
+//  maker Model = cell.detailTextLabel?.text = "Detail wriien in here"
+
+//  TOP TITLE DISPLAY   equipmentListTitle.append("\(equipmentArray[0][savedCompZero]) \(equipmentArray[1][savedCompOne])  \(equipmentArray[2][savedCompTwo])")
+//  BOTTOM DEATIL DISPLAY equipmentListContent.append(convertMutable as String)
+
+//  create requirements, design logic, add user
+
+//  requirements - structure to hold User data and equipment data = Event Object
+//  ACTION 1: call event-addequipment to Event Object
+//  takes picker view array and adds it to Event Object = thisEvent.equipment.append(equipment)
+
+//  ACTION 2: call event-populate-tableview - to parse the Event Object for title and content of each cell structure 2 string arrays
+//  takes struture ??? as argument and creates or returns 2 sting arrays TITLE and DETAIL
+
+//  ACTION 3: create the share camera order content
 
 
-
-
+//  [[], ["1", "Primes", "Zeiss", "Master Primes"], ["1", "Camera", "Arri", "Alexa"], ["2", "Probe Lens", "Innovision", "Probe II+"]]
 
 
 

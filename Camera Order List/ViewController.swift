@@ -18,8 +18,10 @@
 //  Fixed Event object
 //  find wheel 1 causes equip array to default to arri alexa
 //  add equipment array to thisEvent.Equipment
-
 //  add tableview
+//  trouble adding tableview to playgroung... moving on
+
+//  add func to EVENT to populate tableview, populate mail message
 //  add thisEvent.User and thisEvent.Equipment to tableView
 //  smaller pickerwheel text - or fit to size
 
@@ -107,9 +109,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         myLabel.text = equipString
     }
     
+    // MARK: - Add equipment to Even and tableview
     @IBAction func addEquipmentAction(_ sender: Any) {
     
         self.thisEvent.equipment.append(equipment)
+        myTableView.reloadData()
         print("Added Equipment to Event:")
         print((thisEvent.user.name) + " " + (thisEvent.user.production))
         print(thisEvent.equipment)
@@ -158,15 +162,20 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     // MARK: Set up Table View
-    
+    // set the number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return thisEvent.equipment.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
+        //  cell.textLabel?.text = equipmentListTitle[indexPath.row]
+        //  cell.detailTextLabel?.text = equipmentListContent[indexPath.row]
         
-        cell.textLabel?.text = "Test Cell"
+        //  cell.textLabel?.text = thisEvent.equipment[indexPath.row]
+        
+        cell.textLabel?.text = "The Title"
+        cell.detailTextLabel?.text = "Detail wriien in here"
         
         return cell
     }
