@@ -230,38 +230,40 @@ class Event {
         self.equipment = equipment
     }
     
+    func populateTableview ()-> [[String]] {
+        
+        var titleArray = [String]()
+        
+        var detailArray = [String]()
+        
+        // Add user
+        titleArray.append("\(user.name) Director of Photography")
+        
+        detailArray.append("Camera Order \(user.production) \(user.date)")
+        
+        var counter = 0
+        
+        while counter < equipment.count {
+            
+            // getting index out of range errors add print ststements here to debug
+            
+            //   if !index 0 && camera || zoom logic
+            if  counter > 0  && ( equipment[counter][1] == "Camera" || equipment[counter][1] == "Zoom Lens" ) {
+                titleArray.append("\(equipment[counter][0]) \(equipment[counter][1])")
+                detailArray.append("\(equipment[counter][2]) \(equipment[counter][3])")
+            }
+            
+            //   if !index 0 && primes || aks || filters || support || probe logic
+            if  counter > 0  && ( equipment[counter][1] == "Primes" || equipment[counter][1] == "AKS"  || equipment[counter][1] == "Filters" || equipment[counter][1] == "Support" || equipment[counter][1] == "Probe Lens" ) {
+                titleArray.append("\(equipment[counter][0]) \(equipment[counter][1]) \(equipment[counter][2]) Lenses Go Here")
+                //titleArray.append("\(equipment[counter][0]) \(equipment[counter][1]) \(equipment[counter][2]) \(equipment[counter][3])")
+                // add this later whe I have lenses popluater??  detailArray.append("\(equipment[counter][4])")
+            }
+            counter += 1
+        }
+        return [titleArray, detailArray]
+    }
 }
-
-
-//  need a func to make labels in table view
-//  Quantity Catagory maker Model
-//  Quantity Catagory = cell.textLabel?.text = "The Title"
-//  maker Model = cell.detailTextLabel?.text = "Detail wriien in here"
-
-//  TOP TITLE DISPLAY   equipmentListTitle.append("\(equipmentArray[0][savedCompZero]) \(equipmentArray[1][savedCompOne])  \(equipmentArray[2][savedCompTwo])")
-//  BOTTOM DEATIL DISPLAY equipmentListContent.append(convertMutable as String)
-
-//  create requirements, design logic, add user
-
-//  requirements - structure to hold User data and equipment data = Event Object
-//  ACTION 1: call event-addequipment to Event Object
-//  takes picker view array and adds it to Event Object = thisEvent.equipment.append(equipment)
-
-//  ACTION 2: call event-populate-tableview - to parse the Event Object for title and content of each cell structure 2 string arrays
-//  takes struture ??? as argument and creates or returns 2 sting arrays TITLE and DETAIL
-
-//  ACTION 3: create the share camera order content
-
-
-//  [[], ["1", "Primes", "Zeiss", "Master Primes"], ["1", "Camera", "Arri", "Alexa"], ["2", "Probe Lens", "Innovision", "Probe II+"]]
-
-
-
-
-
-
-
-
 
 
 

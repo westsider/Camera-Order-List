@@ -20,10 +20,17 @@
 //  add equipment array to thisEvent.Equipment
 //  add tableview
 //  trouble adding tableview to playgroung... moving on
+//  add func to EVENT to populate tableview
+// this causes oout of index error if i dobt move the picker first
+// fill the equipoment array and text field from picker choices
+// populateEquipmentArray(component: component, row: row)
 
-//  add func to EVENT to populate tableview, populate mail message
+//  tableview not populating the araray - check sixew with print statement
+//  use print statements to populate text in tableviewe till you get it right
+//  add func to EVENT topopulate mail message
 //  add thisEvent.User and thisEvent.Equipment to tableView
 //  smaller pickerwheel text - or fit to size
+//  change name of tableview to mainTableview
 
 import UIKit
 
@@ -46,20 +53,20 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var thisEvent: Event!   //  ? = nil until View Did Load
     
-    // MARK: - Lifecycle Functions
+    var tableViewArray = [[String]]()
+    
+    // MARK: - Lifecycle Functions  --------------------------------------------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.myPicker.dataSource = self
         self.myPicker.delegate = self
-        
         thisEvent = Event(user: defaultUser, equipment: [equipment])
         print("Add instance of Event:")
         print((thisEvent.user.name) + " " + (thisEvent.user.production))
-      
     }
 
-    // MARK: - Picker delegates and controls
+    // MARK: - Picker delegates and controls    -----------------------------------------------------------------------
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 4    //equipmentArray.count
     }
@@ -85,12 +92,14 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         // zero the picker wheels when Catagory changes
         zeroThePicker(component: component, row: row)
         
+
         // fill the equipoment array and text field from picker choices
         populateEquipmentArray(component: component, row: row)
     }
     
     // create an array of equipment from picker
     func populateEquipmentArray(component: Int, row: Int) {
+        
         // find which rows are selected in each component
         let comp0 = localPickerIndex[0][myPicker.selectedRow(inComponent: 0)]
         let comp1 = localPickerIndex[1][myPicker.selectedRow(inComponent: 1)]
@@ -107,12 +116,35 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
         // send this equipment string to the label
         myLabel.text = equipString
+    
     }
     
-    // MARK: - Add equipment to Even and tableview
+    // MARK: - Add equipment to Even and tableview      ----------------------------------------------------------------
     @IBAction func addEquipmentAction(_ sender: Any) {
-    
-        self.thisEvent.equipment.append(equipment)
+        
+        // bool check for data in equipment
+        let isIndexValid = equipment.indices.contains(1)
+        print("equipment contains data is \(isIndexValid)")
+
+        // safely populate Event with pickerdata
+        if isIndexValid {
+            self.thisEvent.equipment.append(equipment)
+            tableViewArray = thisEvent.populateTableview()
+        } else  {   // populate equipment with picker then populate event
+            
+            // find which rows are selected in each component
+            let comp0 = localPickerIndex[0][myPicker.selectedRow(inComponent: 0)]
+            let comp1 = localPickerIndex[1][myPicker.selectedRow(inComponent: 1)]
+            let comp2 = localPickerIndex[2][myPicker.selectedRow(inComponent: 2)]
+            let comp3 = localPickerIndex[3][myPicker.selectedRow(inComponent: 3)]
+            
+            // populate the array for label verification and addition to the event
+            equipment = [comp0, comp1, comp2, comp3]
+            
+            self.thisEvent.equipment.append(equipment)
+            tableViewArray = thisEvent.populateTableview()
+        }
+
         myTableView.reloadData()
         print("Added Equipment to Event:")
         print((thisEvent.user.name) + " " + (thisEvent.user.production))
@@ -161,30 +193,28 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
     }
     
-    // MARK: Set up Table View
+    // MARK: Set up Table View  ---------------------------------------------------------
     // set the number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return thisEvent.equipment.count
+        print("TableView Arraysize: \(tableViewArray.count)")
+        return tableViewArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
-        //  cell.textLabel?.text = equipmentListTitle[indexPath.row]
-        //  cell.detailTextLabel?.text = equipmentListContent[indexPath.row]
+        let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
         
-        //  cell.textLabel?.text = thisEvent.equipment[indexPath.row]
-        
-        cell.textLabel?.text = "The Title"
-        cell.detailTextLabel?.text = "Detail wriien in here"
+//            print("tableViewArray 0")
+//            print(tableViewArray[0])
+//            print("tableViewArray[1]")
+//            print(tableViewArray[1])
+            //  cell.textLabel?.text = "Title"
+            //  cell.detailTextLabel?.text = "Detail"
+            print("This is the array for tableView: \(tableViewArray)")
+            cell.textLabel?.text = tableViewArray[0][indexPath.row]
+            cell.detailTextLabel?.text = tableViewArray[1][indexPath.row]
         
         return cell
     }
-    
-    
-    
-    
-    
-    
     
 }
 
