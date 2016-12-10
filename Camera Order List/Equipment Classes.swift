@@ -245,8 +245,6 @@ class Event {
         
         while counter < equipment.count {
             
-            // getting index out of range errors add print ststements here to debug
-            
             //   if index !0 && camera || zoom logic
             if  counter > 0  && ( equipment[counter][1] == "Camera" || equipment[counter][1] == "Zoom Lens" )
             {
@@ -266,8 +264,12 @@ class Event {
     }
     
     func tableViewSize(tableViewArray: [[String]])-> Int {
-        
-        return tableViewArray[0].count
+        // safely check tableView Size
+        if tableViewArray.count > 0 {
+            return tableViewArray[0].count
+        } else{
+            return tableViewArray.count
+        }
     }
 }
 

@@ -31,6 +31,8 @@
 
 //  // bool check for data in equipment -- not sure this is necessarry now
 //  let isIndexValid = equipment.indices.contains(1)
+
+//  macros not populating array or tableview
 //  add func to EVENT topopulate mail message
 //  add thisEvent.User and thisEvent.Equipment to tableView
 //  smaller pickerwheel text - or fit to size
@@ -127,29 +129,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     // MARK: - Add equipment to Even and tableview      ----------------------------------------------------------------
     @IBAction func addEquipmentAction(_ sender: Any) {
         
-        // bool check for data in equipment -- not sure this is necessarry now
-        let isIndexValid = equipment.indices.contains(1)
-
-        // safely populate Event with pickerdata
-        if isIndexValid {
-            self.thisEvent.equipment.append(equipment)
-            tableViewArray = thisEvent.populateTableview()
-        } else  {   // populate equipment with picker then populate event
-            
-            print("Error populating equipment array and tableview array")
-            
-            // find which rows are selected in each component
-            let comp0 = localPickerIndex[0][myPicker.selectedRow(inComponent: 0)]
-            let comp1 = localPickerIndex[1][myPicker.selectedRow(inComponent: 1)]
-            let comp2 = localPickerIndex[2][myPicker.selectedRow(inComponent: 2)]
-            let comp3 = localPickerIndex[3][myPicker.selectedRow(inComponent: 3)]
-            
-            // populate the array for label verification and addition to the event
-            equipment = [comp0, comp1, comp2, comp3]
-            
-            self.thisEvent.equipment.append(equipment)
-            tableViewArray = thisEvent.populateTableview()
-        }
+        self.thisEvent.equipment.append(equipment)
+        tableViewArray = thisEvent.populateTableview()
 
         myTableView.reloadData()
         print("func addEquipmentAction exiting with: \(thisEvent.equipment)\n")
@@ -195,30 +176,14 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
     }
     
-
     // MARK: Set up Table View  ---------------------------------------------------------
-    // set the number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if tableViewArray.count > 0 {
-
-            print("TableView[0] Arraysize: \(tableViewArray[0].count)\n")
-            return tableViewArray[0].count
-        } else{
-            print("TableView Arraysize: \(tableViewArray.count)\n")
-            return tableViewArray.count
-        }
-     
-//        return thisEvent.tableViewSize(tableViewArray: tableViewArray)
-        
+        return thisEvent.tableViewSize(tableViewArray: tableViewArray)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
-        
-        print("tableViewArray[0] Count: \(tableViewArray[0].count)\n")
-        print("indexPather.row: \(indexPath.row)\n")
-        
             print("This is the array for tableView: \(tableViewArray)\n")
             cell.textLabel?.text = tableViewArray[0][indexPath.row]
             cell.detailTextLabel?.text = tableViewArray[1][indexPath.row]
