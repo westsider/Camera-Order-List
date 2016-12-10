@@ -1,6 +1,13 @@
 //
 //  ViewController.swift
 //  Camera Order List
+//  feat: a new feature
+//  fix: a bug fix
+//  docs: changes to documentation
+//  style: formatting, missing semi colons, etc; no code change
+//  refactor: refactoring production code
+//  test: adding tests, refactoring test; no production code change
+//  chore: updating build tasks, package manager configs, etc; no production code change
 //
 //  Created by Warren Hansen on 11/30/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
@@ -30,12 +37,13 @@
 //  use print statements to populate text in tableviewe till you get it right
 //  // bool check for data in equipment -- not sure this is necessarry now
 //  let isIndexValid = equipment.indices.contains(1)
-
 //  macros not populating array or tableview
+
 //  add func to EVENT topopulate mail message
-//  add thisEvent.User and thisEvent.Equipment to tableView
 //  smaller pickerwheel text - or fit to size
 //  change name of tableview to mainTableview
+//  add icons to equipment object
+//  add icons to tableview
 
 import UIKit
 
@@ -58,7 +66,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var tableViewArray = [[String]]()
     
-    // MARK: - Lifecycle Functions  --------------------------------------------------------------------------------
+    // MARK: - Lifecycle Functions  
     override func viewWillAppear(_ animated: Bool) {
         //  populate Event before view appears
         thisEvent = Event(user: defaultUser, equipment: [equipment])
@@ -77,7 +85,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.myPicker.delegate = self
     }
 
-    // MARK: - Set up Picker    -----------------------------------------------------------------------
+    // MARK: - Set up Picker
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 4    //equipmentArray.count
     }
@@ -107,7 +115,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         populateEquipmentArray(component: component, row: row)
     }
     
-    // MARK: Set up Table View  ---------------------------------------------------------
+    // MARK: Set up Table View  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return thisEvent.tableViewSize(tableViewArray: tableViewArray)
@@ -122,7 +130,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return cell
     }
     
-    // MARK: - TableView Convience Functions    -----------------------------------------------------------------------
+    // MARK: - TableView Convience Functions
     // create an array of equipment from picker
     func populateEquipmentArray(component: Int, row: Int) {
         
@@ -146,7 +154,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         print("func addEquipmentAction exiting with: \(thisEvent.equipment)\n")
     }
     
-    // MARK: - Picker Convience Functions ----------------------------------------------------------------
+    // MARK: - Picker Convience Functions
     // MARK: - call a reload on text in picker UI  depending on the component switched
     func reloadComponentsAndText(component: Int, row: Int) {
         
@@ -185,7 +193,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             prevCatagory = row    // if wheel 1 moves save the componennt to pass to setPickerArray
         }
     }
-    
 }
 
 

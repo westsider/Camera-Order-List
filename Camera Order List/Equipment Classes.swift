@@ -253,7 +253,7 @@ class Event {
             }
             
             //   if index !0 && primes || aks || filters || support || probe logic
-            if  counter > 0  && ( equipment[counter][1] == "Primes" || equipment[counter][1] == "AKS"  || equipment[counter][1] == "Filters" || equipment[counter][1] == "Support" || equipment[counter][1] == "Probe Lens" )
+            if  counter > 0  && ( equipment[counter][1] == "Primes" || equipment[counter][1] == "Macros" || equipment[counter][1] == "AKS"  || equipment[counter][1] == "Filters" || equipment[counter][1] == "Support" || equipment[counter][1] == "Probe Lens" )
             {
                 titleArray.append("\(equipment[counter][0]) \(equipment[counter][1]) \(equipment[counter][2]) \(equipment[counter][3])")
                 detailArray.append("Lenses Go Here")
