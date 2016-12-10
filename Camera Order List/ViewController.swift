@@ -1,6 +1,7 @@
 //
 //  ViewController.swift
 //  Camera Order List
+//
 //  feat: a new feature
 //  fix: a bug fix
 //  docs: changes to documentation
@@ -38,9 +39,9 @@
 //  // bool check for data in equipment -- not sure this is necessarry now
 //  let isIndexValid = equipment.indices.contains(1)
 //  macros not populating array or tableview
-
 //  add func to EVENT topopulate mail message
 //  smaller pickerwheel text - or fit to size
+
 //  change name of tableview to mainTableview
 //  add icons to equipment object
 //  add icons to tableview
@@ -113,6 +114,17 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 
         // fill the equipoment array and text field from picker choices
         populateEquipmentArray(component: component, row: row)
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let pickerLabel = UILabel()
+        
+        pickerLabel.textColor = UIColor.black
+        pickerLabel.text = localPickerIndex[component][row]
+        pickerLabel.font = UIFont(name: "Helvetica", size: 18) // In this use your custom font
+        pickerLabel.textAlignment = NSTextAlignment.center
+        pickerLabel.adjustsFontSizeToFitWidth = true
+        return pickerLabel
     }
     
     // MARK: Set up Table View  
