@@ -28,7 +28,6 @@
 //  How populate tableViewArray on load before addEquipmenAction ?? ViewWillLoad(){
 //  TableViewArray == event.user.name +        user.event.production }
 //  use print statements to populate text in tableviewe till you get it right
-
 //  // bool check for data in equipment -- not sure this is necessarry now
 //  let isIndexValid = equipment.indices.contains(1)
 
@@ -63,14 +62,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     override func viewWillAppear(_ animated: Bool) {
         //  populate Event before view appears
         thisEvent = Event(user: defaultUser, equipment: [equipment])
+        
         // populate eaquipment and tableView array before view appears
-        // find which rows are selected in each component
-        let comp0 = localPickerIndex[0][myPicker.selectedRow(inComponent: 0)]
-        let comp1 = localPickerIndex[1][myPicker.selectedRow(inComponent: 1)]
-        let comp2 = localPickerIndex[2][myPicker.selectedRow(inComponent: 2)]
-        let comp3 = localPickerIndex[3][myPicker.selectedRow(inComponent: 3)]
-        // populate equipment array in case addEquipment is called before picker wheel moves
-        equipment = [comp0, comp1, comp2, comp3]
+        populateEquipmentArray(component: 0, row: 0)
         
         // populate tabbleViewArray with User
         tableViewArray = thisEvent.populateTableview()
@@ -83,7 +77,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.myPicker.delegate = self
     }
 
-    // MARK: - Picker delegates and controls    -----------------------------------------------------------------------
+    // MARK: - Set up Picker    -----------------------------------------------------------------------
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 4    //equipmentArray.count
     }
@@ -113,6 +107,22 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         populateEquipmentArray(component: component, row: row)
     }
     
+    // MARK: Set up Table View  ---------------------------------------------------------
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return thisEvent.tableViewSize(tableViewArray: tableViewArray)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
+        print("This is the array for tableView: \(tableViewArray)\n")
+        cell.textLabel?.text = tableViewArray[0][indexPath.row]
+        cell.detailTextLabel?.text = tableViewArray[1][indexPath.row]
+        
+        return cell
+    }
+    
+    // MARK: - TableView Convience Functions    -----------------------------------------------------------------------
     // create an array of equipment from picker
     func populateEquipmentArray(component: Int, row: Int) {
         
@@ -126,7 +136,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         equipment = [comp0, comp1, comp2, comp3]
     }
     
-    // MARK: - Add equipment to Even and tableview      ----------------------------------------------------------------
+    // MARK: - Add equipment to Event and tableview
     @IBAction func addEquipmentAction(_ sender: Any) {
         
         self.thisEvent.equipment.append(equipment)
@@ -136,7 +146,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         print("func addEquipmentAction exiting with: \(thisEvent.equipment)\n")
     }
     
-    // MARK: - Picker Convience Functions
+    // MARK: - Picker Convience Functions ----------------------------------------------------------------
     // MARK: - call a reload on text in picker UI  depending on the component switched
     func reloadComponentsAndText(component: Int, row: Int) {
         
@@ -174,21 +184,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             myPicker.selectRow(0, inComponent: 3, animated: true)
             prevCatagory = row    // if wheel 1 moves save the componennt to pass to setPickerArray
         }
-    }
-    
-    // MARK: Set up Table View  ---------------------------------------------------------
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return thisEvent.tableViewSize(tableViewArray: tableViewArray)
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
-            print("This is the array for tableView: \(tableViewArray)\n")
-            cell.textLabel?.text = tableViewArray[0][indexPath.row]
-            cell.detailTextLabel?.text = tableViewArray[1][indexPath.row]
-        
-        return cell
     }
     
 }
