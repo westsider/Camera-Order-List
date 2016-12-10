@@ -247,21 +247,27 @@ class Event {
             
             // getting index out of range errors add print ststements here to debug
             
-            //   if !index 0 && camera || zoom logic
-            if  counter > 0  && ( equipment[counter][1] == "Camera" || equipment[counter][1] == "Zoom Lens" ) {
+            //   if index !0 && camera || zoom logic
+            if  counter > 0  && ( equipment[counter][1] == "Camera" || equipment[counter][1] == "Zoom Lens" )
+            {
                 titleArray.append("\(equipment[counter][0]) \(equipment[counter][1])")
                 detailArray.append("\(equipment[counter][2]) \(equipment[counter][3])")
             }
             
-            //   if !index 0 && primes || aks || filters || support || probe logic
-            if  counter > 0  && ( equipment[counter][1] == "Primes" || equipment[counter][1] == "AKS"  || equipment[counter][1] == "Filters" || equipment[counter][1] == "Support" || equipment[counter][1] == "Probe Lens" ) {
-                titleArray.append("\(equipment[counter][0]) \(equipment[counter][1]) \(equipment[counter][2]) Lenses Go Here")
-                //titleArray.append("\(equipment[counter][0]) \(equipment[counter][1]) \(equipment[counter][2]) \(equipment[counter][3])")
-                // add this later whe I have lenses popluater??  detailArray.append("\(equipment[counter][4])")
+            //   if index !0 && primes || aks || filters || support || probe logic
+            if  counter > 0  && ( equipment[counter][1] == "Primes" || equipment[counter][1] == "AKS"  || equipment[counter][1] == "Filters" || equipment[counter][1] == "Support" || equipment[counter][1] == "Probe Lens" )
+            {
+                titleArray.append("\(equipment[counter][0]) \(equipment[counter][1]) \(equipment[counter][2]) \(equipment[counter][3])")
+                detailArray.append("Lenses Go Here")
             }
             counter += 1
         }
         return [titleArray, detailArray]
+    }
+    
+    func tableViewSize(tableViewArray: [[String]])-> Int {
+        
+        return tableViewArray[0].count
     }
 }
 
