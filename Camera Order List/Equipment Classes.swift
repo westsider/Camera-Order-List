@@ -263,6 +263,20 @@ class Event {
         return [titleArray, detailArray]
     }
     
+    func printMessage(dualArrays: [[String]])-> String {
+        var counter = 0
+        var messageString = " "
+        
+        while counter < dualArrays[0].count {
+            for element in dualArrays {
+                messageString  += element[counter] + "\n"
+            }
+            counter += 1
+            
+        }
+        return messageString
+    }
+    
     func tableViewSize(tableViewArray: [[String]])-> Int {
         // safely check tableView Size
         if tableViewArray.count > 0 {
