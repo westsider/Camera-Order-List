@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainTableViewViewController.swift
 //  Camera Order List
 //
 //  feat: a new feature
@@ -41,15 +41,15 @@
 //  macros not populating array or tableview
 //  add func to EVENT topopulate mail message
 //  smaller pickerwheel text - or fit to size
+//  fix: quant display turning from 2-1 causes 2 display 0 print
+//  change name of tableview to MainTableView
 
-//  bug: quant display turning from 2-1 causes 2 display 0 print
-//  change name of tableview to mainTableview
 //  add icons to equipment object
 //  add icons to tableview
 
 import UIKit
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource {
+class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var myPicker: UIPickerView!
     
