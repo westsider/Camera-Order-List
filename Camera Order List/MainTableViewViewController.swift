@@ -43,9 +43,18 @@
 //  smaller pickerwheel text - or fit to size
 //  fix: quant display turning from 2-1 causes 2 display 0 print
 //  change name of tableview to MainTableView
+//  feat: added icons and a ListTableViewCell
 
-//  add icons to equipment object
-//  add icons to tableview
+//  chore:  icons to equipment object
+//  feat: added unique icons to tableview items
+//  *** Denotes big Jobs to do
+//  *** create past orders object to playground, then a storyboard, then to equipment classes
+//  *** Production info and weather report
+//  *** lens details
+//  *** Core Data persistence of Important objects
+//  *** Tutorial framework of alert views that page by, leave the instruction for later date
+
+//  **** After all of the app is working finish adding all of the equipment
 
 import UIKit
 
@@ -67,6 +76,8 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     var thisEvent: Event!   //  ? = nil until View Did Load
     
     var tableViewArray = [[String]]()
+    
+    let cellIdentifier = "ListTableViewCell"
     
     // MARK: - Lifecycle Functions  
     override func viewWillAppear(_ animated: Bool) {
@@ -136,10 +147,19 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
+//  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
+        
+//        let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellIdentifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ListTableViewCell
+        
         print("This is the array for tableView: \(tableViewArray)\n")
-        cell.textLabel?.text = tableViewArray[0][indexPath.row]
-        cell.detailTextLabel?.text = tableViewArray[1][indexPath.row]
+//        cell.textLabel?.text = tableViewArray[0][indexPath.row]
+//        cell.detailTextLabel?.text = tableViewArray[1][indexPath.row]
+        
+//        cell.titleTableView?.text = tableViewArray[0][indexPath.row]
+        
+        cell.titleTableView?.text = tableViewArray[0][indexPath.row]
+        cell.detailTableView?.text = tableViewArray[1][indexPath.row]
         
         return cell
     }
