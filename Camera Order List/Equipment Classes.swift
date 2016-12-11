@@ -120,7 +120,8 @@ func setPickerArray(component: Int, row: Int, lastCatagory: Int ) -> [[String]] 
     
     if component < 3 {
         switch component {
-            //  case 0 is loaded on first run in VC
+            //  case 0 is component 0 loaded on first run in VC
+            //  have bug that causes improper display of comp 0 when de incrementing
             
         case 1: // change Catagory and maker populates
             switch row {
@@ -193,7 +194,7 @@ func setPickerArray(component: Int, row: Int, lastCatagory: Int ) -> [[String]] 
                 break
             }
             
-        case 3:  //  change Model -- this logic not needed because wheel 1 and 2 populate wheel 3
+        case 3:  //  change Model -- this logic not needed because wheel 1 and 2 populate compoment 3
             break
 
         default:

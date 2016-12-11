@@ -42,6 +42,7 @@
 //  add func to EVENT topopulate mail message
 //  smaller pickerwheel text - or fit to size
 
+//  bug: quant display turning from 2-1 causes 2 display 0 print
 //  change name of tableview to mainTableview
 //  add icons to equipment object
 //  add icons to tableview
@@ -105,7 +106,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         //  dont reload localPickerIndex when component 0 or 3 move
-        dontReloadOnComp1or3(component: component, row: row, lastCatagory: prevCatagory)
+        dontReloadOnComp0or3(component: component, row: row, lastCatagory: prevCatagory)
         
         reloadComponentsAndText(component: component, row: row)
         
@@ -116,6 +117,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         populateEquipmentArray(component: component, row: row)
     }
     
+    //  make picker text fill space allowed
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         
@@ -186,12 +188,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     //  dont reload localPickerIndex when component 0 or 3 move
-    func dontReloadOnComp1or3(component: Int, row: Int, lastCatagory: Int) {
-        if component == 0 {
-            // only update the quantity
-            localPickerIndex[0][0]  = String(myPicker.selectedRow(inComponent: 0))
-        }
-        
+    func dontReloadOnComp0or3(component: Int, row: Int, lastCatagory: Int) {
+
         if component == 1 || component == 2 {     //  full update on comp 1 and 2 only
             localPickerIndex = setPickerArray(component: component, row: row, lastCatagory: prevCatagory)
         }
