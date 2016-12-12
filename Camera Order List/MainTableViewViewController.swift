@@ -71,7 +71,9 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     var equipment = [String]()
     
-    var defaultUser = User(name: "Warren Hansen", production: "Nike", company: "CO3", city: "SantaMonica", date: "12 / 20 / 2016", weather: "Sunny 72")
+    var defaultUser = User(name: "Warren Hansen", production: "Nike", company: "CO3", city: "SantaMonica", date: "12 / 20 / 2016", weather: "Sunny 72", icon: UIImage(named: "manIcon")!)
+    
+    var image = [UIImage]()
     
     var thisEvent: Event!   //  ? = nil until View Did Load
     
@@ -82,13 +84,14 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     // MARK: - Lifecycle Functions  
     override func viewWillAppear(_ animated: Bool) {
         //  populate Event before view appears
-        thisEvent = Event(user: defaultUser, equipment: [equipment])
+        //thisEvent = Event(user: defaultUser, equipment: [equipment])
+        thisEvent = Event(user: defaultUser, equipment: [equipment], images: image)
         
         // populate eaquipment and tableView array before view appears
         populateEquipmentArray(component: 0, row: 0)
         
         // populate tabbleViewArray with User
-        tableViewArray = thisEvent.populateTableview()
+        tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1))
     }
     
     override func viewDidLoad() {
@@ -147,17 +150,13 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
-        
-//        let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellIdentifier)
+
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ListTableViewCell
         
         print("This is the array for tableView: \(tableViewArray)\n")
-//        cell.textLabel?.text = tableViewArray[0][indexPath.row]
-//        cell.detailTextLabel?.text = tableViewArray[1][indexPath.row]
-        
-//        cell.titleTableView?.text = tableViewArray[0][indexPath.row]
-        
+
+        let photo1 = UIImage(named: "gearIcon")!
+        cell.imageTableViewCell.image = photo1
         cell.titleTableView?.text = tableViewArray[0][indexPath.row]
         cell.detailTableView?.text = tableViewArray[1][indexPath.row]
         
@@ -181,8 +180,9 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     // MARK: - Add equipment to Event and tableview
     @IBAction func addEquipmentAction(_ sender: Any) {
         
-        self.thisEvent.equipment.append(equipment)
-        tableViewArray = thisEvent.populateTableview()
+        //self.thisEvent.equipment.append(equipment)
+        self.thisEvent.addEquipment(comp2: myPicker.selectedRow(inComponent: 1), equip: equipment)
+        tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1) )
 
         myTableView.reloadData()
         print("func addEquipmentAction exiting with: \(thisEvent.equipment)\n")

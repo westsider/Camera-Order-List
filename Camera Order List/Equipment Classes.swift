@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 let Quantity = ["1","2","3","4","5","6","7","8","9"]
 
@@ -196,12 +197,42 @@ func setPickerArray(component: Int, row: Int, lastCatagory: Int ) -> [[String]] 
             
         case 3:  //  change Model -- this logic not needed because wheel 1 and 2 populate compoment 3
             break
-
+            
         default:
             break
         }
     }
     return equipmentArray
+}
+
+
+func setTableViewIcon(catagory: Int)-> UIImage {
+    
+    var thisImage:UIImage
+    
+    switch catagory {
+    case 0: //  .camera:
+        thisImage = UIImage(named: "cameraIcon")!
+    case 1: //  .primes:
+        thisImage = UIImage(named: "lensIcon")!
+    case 2: //  .macros:
+        thisImage = UIImage(named: "lensIcon")!
+    case 3: //  .probeLens:
+        thisImage = UIImage(named: "lensIcon")!
+    case 4: //  .zoomLens:
+        thisImage = UIImage(named: "lensIcon")!
+    case 5: //  .aks:
+        thisImage = UIImage(named: "gearIcon")!
+    case 6: //  .finder:
+        thisImage = UIImage(named: "gearIcon")!
+    case 7: //  .filters:
+        thisImage = UIImage(named: "gearIcon")!
+    case 8: //  .support:
+        thisImage = UIImage(named: "gearIcon")!
+    default:
+        thisImage = UIImage(named: "manIcon")!
+    }
+    return thisImage
 }
 
 class User {
@@ -211,73 +242,172 @@ class User {
     var city: String
     var date: String
     var weather: String
+    var icon: UIImage
     //var logo: NSData
-    init(name: String, production: String, company: String, city: String, date: String, weather: String) {
+    init(name: String, production: String, company: String, city: String, date: String, weather: String, icon: UIImage) {
         self.name = name
         self.production = production
         self.company = company
         self.city = city
         self.date = date
         self.weather = weather
+        self.icon = icon
     }
 }
 
 class Event {
     var user: User
     var equipment = [[String]]()
-
-    init(user: User, equipment: [[String]]){
+    var images = [UIImage]()
+    
+    init(user: User, equipment: [[String]], images: [UIImage]){
         self.user = user
         self.equipment = equipment
+        self.images = images
     }
     
-    func populateTableview ()-> [[String]] {
+    //  Append the equipment array inside the event class
+    func addEquipment(comp2: Int, equip: [String]){
+        // replace the constructed array
+        if equipment[0].isEmpty {
+            equipment.removeAll(keepingCapacity: true)
+            equipment.append(equip)
+            self.images.append(setTableViewIcon(catagory: comp2))
+        } else {
+            self.equipment.append(equip)
+            self.images.append(setTableViewIcon(catagory: comp2))
+        }
+    }
+    
+    func setTableViewIcon(catagory: Int)-> UIImage {
+        
+        var thisImage:UIImage
+        
+        switch catagory {
+        case 0: //  .camera:
+            thisImage = UIImage(named: "cameraIcon")!
+        case 1: //  .primes:
+            thisImage = UIImage(named: "lensIcon")!
+        case 2: //  .macros:
+            thisImage = UIImage(named: "lensIcon")!
+        case 3: //  .probeLens:
+            thisImage = UIImage(named: "lensIcon")!
+        case 4: //  .zoomLens:
+            thisImage = UIImage(named: "lensIcon")!
+        case 5: //  .aks:
+            thisImage = UIImage(named: "gearIcon")!
+        case 6: //  .finder:
+            thisImage = UIImage(named: "gearIcon")!
+        case 7: //  .filters:
+            thisImage = UIImage(named: "gearIcon")!
+        case 8: //  .support:
+            thisImage = UIImage(named: "gearIcon")!
+        default:
+            thisImage = UIImage(named: "manIcon")!
+        }
+        return thisImage
+    }
+    
+    func populateTableview (catagory: Int)-> [[String]] {
         
         var titleArray = [String]()
         
         var detailArray = [String]()
+        
+        var imageArray = [UIImage]()
         
         // Add user
         titleArray.append("\(user.name) Director of Photography")
         
         detailArray.append("Camera Order \(user.production) \(user.date)")
         
-        var counter = 0
+        imageArray.append( UIImage(named: "manIcon")!)
         
+        if equipment[0].isEmpty {
+            print("Its empty")
+            equipment.removeAll(keepingCapacity: true)
+            equipment.append( ["1a", "Camera", "Arri", "Alexa"])
+            print(equipment)
+        }
+        
+        var counter = 0
+        // looping equipment[] assigning title and detail for the TableViewArray
         while counter < equipment.count {
             
-            //   if index !0 && camera || zoom logic
-            if  counter > 0  && ( equipment[counter][1] == "Camera" || equipment[counter][1] == "Zoom Lens" )
-            {
+            // camera || zoom logic -- if counter == 0 just user in array, dont add equip
+            if  counter > 0 && ( equipment[counter][1] == "Camera" || equipment[counter][1] == "Zoom Lens" ) {
                 titleArray.append("\(equipment[counter][0]) \(equipment[counter][1])")
                 detailArray.append("\(equipment[counter][2]) \(equipment[counter][3])")
             }
             
-            //   if index !0 && primes || aks || filters || support || probe logic
+            // primes || aks || filters || support || probe logic
             if  counter > 0  && ( equipment[counter][1] == "Primes" || equipment[counter][1] == "Macros" || equipment[counter][1] == "AKS"  || equipment[counter][1] == "Filters" || equipment[counter][1] == "Support" || equipment[counter][1] == "Probe Lens" )
             {
                 titleArray.append("\(equipment[counter][0]) \(equipment[counter][1]) \(equipment[counter][2]) \(equipment[counter][3])")
                 detailArray.append("Lenses Go Here")
             }
+            
             counter += 1
         }
         return [titleArray, detailArray]
     }
+    //        var titleArray = [String]()
+    //
+    //        var detailArray = [String]()
+    //
+    //        var iconArray =   [UIImage]()  // let photo1 = UIImage(named: "gearIcon")!
+    //
+    //        // Add user
+    //        titleArray.append("\(user.name) Director of Photography")
+    //
+    //        detailArray.append("Camera Order \(user.production) \(user.date)")
+    //
+    //        iconArray.append(UIImage(named: "manIcon")!)
+    //
+    //        var counter = 0
+    //
+    //        // looping equipment[] assigning title and detail for the TableViewArray
+    //        while counter < equipment.count {
+    //
+    ////  let thisCatagory:Catagory = Catagory(equipment[counter][1])
+    //
+    //            // having trouble getting the Catagory into this function. When is it calles and can I pass in catagory?
+    //           // now I am passing an Int to show which wheel is selected
+    //            // drag the wheel doesnt help me with an array already established as equipment.. am I adding this in the worng place
+    //
+    //            //   if index !0 && camera || zoom logic
+    //            if  counter > 0  && ( equipment[counter][1] == "Camera" || equipment[counter][1] == "Zoom Lens" )
+    //            {
+    //                titleArray.append("\(equipment[counter][0]) \(equipment[counter][1])")
+    //                detailArray.append("\(equipment[counter][2]) \(equipment[counter][3])")
+    ////   iconArray.append(setTableViewIcon(catagory: <#T##Catagory#>))
+    //            }
+    //
+    //            //   if index !0 && primes || aks || filters || support || probe logic
+    //            if  counter > 0  && ( equipment[counter][1] == "Primes" || equipment[counter][1] == "Macros" || equipment[counter][1] == "AKS"  || equipment[counter][1] == "Filters" || equipment[counter][1] == "Support" || equipment[counter][1] == "Probe Lens" )
+    //            {
+    //                titleArray.append("\(equipment[counter][0]) \(equipment[counter][1]) \(equipment[counter][2]) \(equipment[counter][3])")
+    //                detailArray.append("Lenses Go Here")
+    //            }
+    //            counter += 1
+    //        }
+    //        return [titleArray, detailArray]
+    //    }
     
     func printMessage(dualArrays: [[String]])-> String {
         var counter = 0
-        var messageString = " "
+        var messageString = ""
         
         while counter < dualArrays[0].count {
             for element in dualArrays {
                 messageString  += element[counter] + "\n"
             }
             counter += 1
-            
+            messageString  += "\n"
         }
+        print("mail:\n\(messageString)")
         return messageString
     }
-    
     func tableViewSize(tableViewArray: [[String]])-> Int {
         // safely check tableView Size
         if tableViewArray.count > 0 {
