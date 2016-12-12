@@ -80,8 +80,6 @@ func setPrimesModel(maker: MakerPrimes) -> [String] {
         return ["K-35", "Telephoto"]
     case .cooke:
         return ["i5", "S4", "Speed Panchro"]
-        //default:
-        //  return  ["set prime model", "failed", "break"]
     }
 }
 
@@ -91,8 +89,6 @@ func setMacrosModel(maker: MakerMacros) -> [String] {
         return ["Macro"]
     case .zeiss:
         return ["Master Primes"]
-        //default:
-        //  return  ["set prime model", "failed", "break"]
     }
 }
 
@@ -110,8 +106,6 @@ func setProbeModel(maker: MakerProbe) -> [String] {
         return ["Periscope"]
     case .optex:
         return ["Excellence"]
-        //default:
-        //  return  ["set probe model", "failed", "break"]
     }
 }
 
@@ -121,8 +115,6 @@ func setPickerArray(component: Int, row: Int, lastCatagory: Int ) -> [[String]] 
     
     if component < 3 {
         switch component {
-            //  case 0 is component 0 loaded on first run in VC
-            //  have bug that causes improper display of comp 0 when de incrementing
             
         case 1: // change Catagory and maker populates
             switch row {
@@ -351,48 +343,6 @@ class Event {
         }
         return [titleArray, detailArray]
     }
-    //        var titleArray = [String]()
-    //
-    //        var detailArray = [String]()
-    //
-    //        var iconArray =   [UIImage]()  // let photo1 = UIImage(named: "gearIcon")!
-    //
-    //        // Add user
-    //        titleArray.append("\(user.name) Director of Photography")
-    //
-    //        detailArray.append("Camera Order \(user.production) \(user.date)")
-    //
-    //        iconArray.append(UIImage(named: "manIcon")!)
-    //
-    //        var counter = 0
-    //
-    //        // looping equipment[] assigning title and detail for the TableViewArray
-    //        while counter < equipment.count {
-    //
-    ////  let thisCatagory:Catagory = Catagory(equipment[counter][1])
-    //
-    //            // having trouble getting the Catagory into this function. When is it calles and can I pass in catagory?
-    //           // now I am passing an Int to show which wheel is selected
-    //            // drag the wheel doesnt help me with an array already established as equipment.. am I adding this in the worng place
-    //
-    //            //   if index !0 && camera || zoom logic
-    //            if  counter > 0  && ( equipment[counter][1] == "Camera" || equipment[counter][1] == "Zoom Lens" )
-    //            {
-    //                titleArray.append("\(equipment[counter][0]) \(equipment[counter][1])")
-    //                detailArray.append("\(equipment[counter][2]) \(equipment[counter][3])")
-    ////   iconArray.append(setTableViewIcon(catagory: <#T##Catagory#>))
-    //            }
-    //
-    //            //   if index !0 && primes || aks || filters || support || probe logic
-    //            if  counter > 0  && ( equipment[counter][1] == "Primes" || equipment[counter][1] == "Macros" || equipment[counter][1] == "AKS"  || equipment[counter][1] == "Filters" || equipment[counter][1] == "Support" || equipment[counter][1] == "Probe Lens" )
-    //            {
-    //                titleArray.append("\(equipment[counter][0]) \(equipment[counter][1]) \(equipment[counter][2]) \(equipment[counter][3])")
-    //                detailArray.append("Lenses Go Here")
-    //            }
-    //            counter += 1
-    //        }
-    //        return [titleArray, detailArray]
-    //    }
     
     func printMessage(dualArrays: [[String]])-> String {
         var counter = 0
@@ -408,6 +358,7 @@ class Event {
         print("mail:\n\(messageString)")
         return messageString
     }
+    
     func tableViewSize(tableViewArray: [[String]])-> Int {
         // safely check tableView Size
         if tableViewArray.count > 0 {

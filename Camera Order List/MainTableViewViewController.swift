@@ -45,10 +45,9 @@
 //  change name of tableview to MainTableView
 //  feat: added icons and a ListTableViewCell
 //  chore:  icons to equipment object
-
 //  feat: added unique icons to tableview items
-//  make icons smaller
-//  make text consustant
+
+//  style: make icons smaller and text consistant helvetica Neu
 //  *** Denotes big Jobs to do
 //  *** create past orders object to playground, then a storyboard, then to equipment classes
 //  *** Production info and weather report
@@ -87,7 +86,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     override func viewWillAppear(_ animated: Bool) {
         //  populate Event before view appears
         thisEvent = Event(user: defaultUser, equipment: [equipment], images: image)
-thisEvent.images.append(thisEvent.user.icon)
+        thisEvent.images.append(thisEvent.user.icon)
         
         // populate eaquipment and tableView array before view appears
         populateEquipmentArray(component: 0, row: 0)
@@ -136,7 +135,6 @@ thisEvent.images.append(thisEvent.user.icon)
     //  make picker text fill space allowed
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
-        
         pickerLabel.textColor = UIColor.black
         pickerLabel.text = localPickerIndex[component][row]
         pickerLabel.font = UIFont(name: "Helvetica", size: 18) // In this use your custom font
@@ -154,15 +152,10 @@ thisEvent.images.append(thisEvent.user.icon)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ListTableViewCell
-        
         print("This is the array for tableView: \(tableViewArray)\n")
-
-       // let photo1 = UIImage(named: "gearIcon")!
-
-cell.imageTableViewCell.image =  thisEvent.images[indexPath.row] //image[indexPath.row]
+        cell.imageTableViewCell.image =  thisEvent.images[indexPath.row] //image[indexPath.row]
         cell.titleTableView?.text = tableViewArray[0][indexPath.row]
         cell.detailTableView?.text = tableViewArray[1][indexPath.row]
-        
         return cell
     }
     
