@@ -44,9 +44,11 @@
 //  fix: quant display turning from 2-1 causes 2 display 0 print
 //  change name of tableview to MainTableView
 //  feat: added icons and a ListTableViewCell
-
 //  chore:  icons to equipment object
+
 //  feat: added unique icons to tableview items
+//  make icons smaller
+//  make text consustant
 //  *** Denotes big Jobs to do
 //  *** create past orders object to playground, then a storyboard, then to equipment classes
 //  *** Production info and weather report
@@ -84,8 +86,8 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     // MARK: - Lifecycle Functions  
     override func viewWillAppear(_ animated: Bool) {
         //  populate Event before view appears
-        //thisEvent = Event(user: defaultUser, equipment: [equipment])
         thisEvent = Event(user: defaultUser, equipment: [equipment], images: image)
+thisEvent.images.append(thisEvent.user.icon)
         
         // populate eaquipment and tableView array before view appears
         populateEquipmentArray(component: 0, row: 0)
@@ -155,8 +157,9 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         print("This is the array for tableView: \(tableViewArray)\n")
 
-        let photo1 = UIImage(named: "gearIcon")!
-        cell.imageTableViewCell.image = photo1
+       // let photo1 = UIImage(named: "gearIcon")!
+
+cell.imageTableViewCell.image =  thisEvent.images[indexPath.row] //image[indexPath.row]
         cell.titleTableView?.text = tableViewArray[0][indexPath.row]
         cell.detailTableView?.text = tableViewArray[1][indexPath.row]
         
