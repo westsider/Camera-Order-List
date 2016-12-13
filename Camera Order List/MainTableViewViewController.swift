@@ -49,7 +49,8 @@
 //  style: make icons smaller and text consistant helvetica Neu
 //  feat: add eventName to Event Object in prep for adding past events VC
 
-//  feat: create past events view contorller,
+//  feat: create past events view contorller
+//  feat: use mail sytle navigation controller
 //  feat: create past events array loadable in past events VC
 
 //  *** Production info and weather report
