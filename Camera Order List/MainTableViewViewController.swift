@@ -46,10 +46,12 @@
 //  feat: added icons and a ListTableViewCell
 //  chore:  icons to equipment object
 //  feat: added unique icons to tableview items
-
 //  style: make icons smaller and text consistant helvetica Neu
-//  *** Denotes big Jobs to do
-//  *** create past orders object to playground, then a storyboard, then to equipment classes
+//  feat: add eventName to Event Object in prep for adding past events VC
+
+//  feat: create past events view contorller,
+//  feat: create past events array loadable in past events VC
+
 //  *** Production info and weather report
 //  *** lens details
 //  *** Core Data persistence of Important objects
@@ -85,7 +87,8 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     // MARK: - Lifecycle Functions  
     override func viewWillAppear(_ animated: Bool) {
         //  populate Event before view appears
-        thisEvent = Event(user: defaultUser, equipment: [equipment], images: image)
+        //thisEvent = Event(user: defaultUser, equipment: [equipment], images: image)
+        thisEvent = Event(eventName: "Current", user: defaultUser, equipment: [equipment], images: image)
         thisEvent.images.append(thisEvent.user.icon)
         
         // populate eaquipment and tableView array before view appears
