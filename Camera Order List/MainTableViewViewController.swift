@@ -48,9 +48,9 @@
 //  feat: added unique icons to tableview items
 //  style: make icons smaller and text consistant helvetica Neu
 //  feat: add eventName to Event Object in prep for adding past events VC
-
 //  feat: create past events view contorller
-//  feat: use mail sytle navigation controller
+//  feat: add navigation controller
+
 //  feat: create past events array loadable in past events VC
 
 //  *** Production info and weather report
@@ -101,11 +101,16 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "C A M E R A  O R D E R"
         self.myPicker.dataSource = self
         self.myPicker.delegate = self
     }
 
+    // MARK: Save / Add Action
+    @IBAction func saveAddAction(_ sender: Any) {
+        //performSegue(withIdentifier: "MainToPastOrders", sender: self)
+    }
+    
     // MARK: - Set up Picker
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 4    //equipmentArray.count
