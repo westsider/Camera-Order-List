@@ -51,9 +51,12 @@
 //  feat: create past events view contorller
 //  feat: add navigation controller
 //  feat: create past events array loadable in past events VC
-
-//  namually create a pastUserArray
+//  manually create a pastUserArray
 //  load the array into tableview
+//  use text input to name current array
+//  append event array ewhen new name is saved
+
+//  prove item persists bettween segues back and forth
 
 //  *** Production info and weather report
 //  *** lens details
@@ -91,7 +94,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     override func viewWillAppear(_ animated: Bool) {
         //  populate Event before view appears
         //thisEvent = Event(user: defaultUser, equipment: [equipment], images: image)
-        thisEvent = Event(eventName: "Current", user: defaultUser, equipment: [equipment], images: image)
+        thisEvent = Event(eventName: "Passed In Current", user: defaultUser, equipment: [equipment], images: image)
         thisEvent.images.append(thisEvent.user.icon)
         
         // populate eaquipment and tableView array before view appears
