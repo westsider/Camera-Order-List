@@ -5,16 +5,16 @@
 //  Created by Warren Hansen on 12/13/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 //
-//  use text input to name current array
-//  append event array every time we segue
 
 import UIKit
+
+var allEvents = [Event]()   // global ubntil I design persistance
 
 class PastOrdersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     var newEvent: Event!
     
-    var allEvents = [Event]()
+    var tableViewTitleArray = [String]()
     
     var equipment = [String]()
     
@@ -22,7 +22,7 @@ class PastOrdersViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var image = [UIImage]()
     
-    var tableViewTitleArray = [String]()
+    
 
     @IBOutlet weak var eventsTableView: UITableView!
 
@@ -36,22 +36,22 @@ class PastOrdersViewController: UIViewController, UITableViewDelegate, UITableVi
 
     override func viewWillAppear(_ animated: Bool) {
         
-        let pastEvent00 = Event(eventName: "Daylight Order", user: defaultUser, equipment: [equipment], images: image)
-        let pastEvent01 = Event(eventName: "Tugsten Order", user: defaultUser, equipment: [equipment], images: image)
-        let pastEvent02 = Event(eventName: "TacoBell", user: defaultUser, equipment: [equipment], images: image)
+//        // only load this until allEvents are persistant then delete
+//        let pastEvent00 = Event(eventName: "Daylight Order", user: defaultUser, equipment: [equipment], images: image)
+//        let pastEvent01 = Event(eventName: "Tugsten Order", user: defaultUser, equipment: [equipment], images: image)
+//        let pastEvent02 = Event(eventName: "TacoBell", user: defaultUser, equipment: [equipment], images: image)
+//        
+//        if allEvents.count == 0 {
+//            allEvents.append(pastEvent00)
+//            allEvents.append(pastEvent01)
+//            allEvents.append(pastEvent02)
+//        }
         
-        
-        allEvents.append(pastEvent00)
-        allEvents.append(pastEvent01)
-        allEvents.append(pastEvent02)
-        
-        
-        tableViewTitleArray.append(pastEvent00.eventName)
-        tableViewTitleArray.append(pastEvent01.eventName)
-        tableViewTitleArray.append(pastEvent02.eventName)
-        
-        
-        print("This is the Prior Orders VC: \(newEvent.eventName)")
+        // load table view name array
+        for events in allEvents {
+            let name =  events.eventName
+            tableViewTitleArray.append(name)
+        }
         
     }
     
