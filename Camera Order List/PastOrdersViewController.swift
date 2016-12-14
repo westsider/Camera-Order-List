@@ -8,7 +8,7 @@
 
 import UIKit
 
-var allEvents = [Event]()   // global ubntil I design persistance
+var allEvents = [Event]()   // global ubntil I design persistance in Core Data
 
 class PastOrdersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
@@ -18,11 +18,9 @@ class PastOrdersViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var equipment = [String]()
     
-    var defaultUser = User(name: "Warren Hansen", production: "Nike", company: "CO3", city: "SantaMonica", date: "12 / 20 / 2016", weather: "Sunny 72", icon: UIImage(named: "manIcon")!)
+//    var defaultUser = User(name: "Warren Hansen", production: "Nike", company: "CO3", city: "SantaMonica", date: "12 / 20 / 2016", weather: "Sunny 72", icon: UIImage(named: "manIcon")!)
     
     var image = [UIImage]()
-    
-    
 
     @IBOutlet weak var eventsTableView: UITableView!
 

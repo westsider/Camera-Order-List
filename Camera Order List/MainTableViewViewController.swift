@@ -55,8 +55,7 @@
 //  load the array into tableview
 //  use text input to name current array
 //  append event array ewhen new name is saved
-
-//  prove item persists bettween segues back and forth
+//  feat: proved item persists bettween segues back and forth
 
 //  *** Production info and weather report
 //  *** lens details
@@ -243,6 +242,12 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         if segue.identifier == "mainToPriorOrders" {
             let controller = segue.destination as! PastOrdersViewController
             controller.newEvent = thisEvent
+        }
+        
+        if segue.identifier == "mainToUser" {
+            let controller = segue.destination as! UserViewController
+            controller.defaultUser = defaultUser
+            print("Segue with default user to Users VC")
         }
     }
 }
