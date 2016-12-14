@@ -50,8 +50,10 @@
 //  feat: add eventName to Event Object in prep for adding past events VC
 //  feat: create past events view contorller
 //  feat: add navigation controller
-
 //  feat: create past events array loadable in past events VC
+
+//  namually create a pastUserArray
+//  load the array into tableview
 
 //  *** Production info and weather report
 //  *** lens details
@@ -105,11 +107,16 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         self.myPicker.dataSource = self
         self.myPicker.delegate = self
     }
-
+    
     // MARK: Save / Add Action
     @IBAction func saveAddAction(_ sender: Any) {
+        
         //performSegue(withIdentifier: "MainToPastOrders", sender: self)
+        
+
     }
+    
+
     
     // MARK: - Set up Picker
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -226,6 +233,13 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             myPicker.selectRow(0, inComponent: 2, animated: true)
             myPicker.selectRow(0, inComponent: 3, animated: true)
             prevCatagory = row    // if wheel 1 moves save the componennt to pass to setPickerArray
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "mainToPriorOrders" {
+            let controller = segue.destination as! PastOrdersViewController
+            controller.newEvent = thisEvent
         }
     }
 }

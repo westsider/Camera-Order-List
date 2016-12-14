@@ -103,7 +103,7 @@
                                 </state>
                                 <connections>
                                     <action selector="saveAddAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DgX-AQ-7Gi"/>
-                                    <segue destination="7tD-aZ-gFs" kind="show" id="cbw-nS-pZ3"/>
+                                    <segue destination="7tD-aZ-gFs" kind="show" identifier="mainToPriorOrders" id="cbw-nS-pZ3"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAm-mR-RW4">
