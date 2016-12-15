@@ -6,10 +6,12 @@
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 //  fix nav title bar miissing
 //  feat: segue with tap on user row
+//  feat: segue back to Main with new default user
 
-//  segue back to Main with new default user
-//  design weather UI
-//  design weather API
+//  feat: func to dismiss keyboard on return & click away
+//  feat: design weather UI
+//  feat: design weather API
+//  feat: integrate weather api
 
 import UIKit
 
@@ -43,6 +45,7 @@ class UserViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK:  - Update User
     @IBAction func updateAction(_ sender: Any) {
         
         // change default text to user name
@@ -70,8 +73,15 @@ class UserViewController: UIViewController, UITextFieldDelegate {
         
         print("User: \(defaultUser.name) Prod: \(defaultUser.production) CO: \(defaultUser.company)")
         
-        
-        
+        // userToMain Segue done on storyboard
+        //performSegue(withIdentifier: "", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "userToMain" {
+            let controller = segue.destination as! MainTableViewController
+            controller.defaultUser = defaultUser
+        }
     }
 
 }
