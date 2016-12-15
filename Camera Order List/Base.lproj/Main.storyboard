@@ -124,9 +124,6 @@
                                 <state key="normal" title="Send">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="uPg-rF-zXE" kind="show" identifier="mainToUser" id="URc-AI-gBt"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -157,6 +154,7 @@
                     <connections>
                         <outlet property="myPicker" destination="E3n-ge-Oib" id="O2B-PJ-DvS"/>
                         <outlet property="myTableView" destination="Ag3-Qp-JVS" id="rgo-JC-OwM"/>
+                        <segue destination="uPg-rF-zXE" kind="show" identifier="mainToUser" id="Udl-S7-gda"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -257,7 +255,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Order" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ed-C4-WTc">
-                                <rect key="frame" x="16" y="72" width="227" height="21"/>
+                                <rect key="frame" x="16" y="116" width="227" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Oiz-11-5YB"/>
                                 </constraints>
@@ -303,7 +301,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Job Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dm-hi-ooU">
-                                <rect key="frame" x="16" y="96" width="227" height="21"/>
+                                <rect key="frame" x="16" y="140" width="227" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="15D-Ow-u6K"/>
                                 </constraints>
@@ -312,13 +310,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="myAppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="JcZ-3B-nzP">
-                                <rect key="frame" x="259" y="72" width="100" height="100"/>
+                                <rect key="frame" x="259" y="116" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="2dM-ua-CwW"/>
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Add production info and click on the date or city to get an updated weather report." textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lj5-gh-DgL">
-                                <rect key="frame" x="16" y="120" width="227" height="59"/>
+                                <rect key="frame" x="16" y="164" width="227" height="59"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="59" id="Uz1-rr-7Lq"/>
@@ -346,7 +344,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SimpleWeather" translatesAutoresizingMaskIntoConstraints="NO" id="lc5-rY-qjV">
-                                <rect key="frame" x="0.0" y="193" width="375" height="191"/>
+                                <rect key="frame" x="0.0" y="237" width="375" height="147"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fwU-kq-XaG">
                                 <rect key="frame" x="142" y="593" width="90" height="30"/>

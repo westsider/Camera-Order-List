@@ -177,6 +177,15 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         return cell
     }
     
+    // MARK: - Segue to User VC
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            print("Row: \(indexPath.row) segue to User")
+            
+            performSegue(withIdentifier: "mainToUser", sender: self)
+        }
+    }
+    
     // MARK: - TableView Convience Functions
     // create an array of equipment from picker
     func populateEquipmentArray(component: Int, row: Int) {

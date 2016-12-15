@@ -5,6 +5,7 @@
 //  Created by Warren Hansen on 12/14/16.
 //  Copyright © 2016 Warren Hansen. All rights reserved.
 //  fix nav title bar miissing
+//  feat: segue with tap on user row
 
 //  segue back to Main with new default user
 //  design weather UI
