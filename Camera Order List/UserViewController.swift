@@ -7,8 +7,8 @@
 //  fix nav title bar miissing
 //  feat: segue with tap on user row
 //  feat: segue back to Main with new default user
-
 //  feat: func to dismiss keyboard on return & click away
+
 //  feat: design weather UI
 //  feat: design weather API
 //  feat: integrate weather api
@@ -27,14 +27,15 @@ class UserViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.userName.delegate = self
+        self.production.delegate = self
+        self.company.delegate = self
         
         print("VDL: Name: \(defaultUser.name)")
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        
         userName.text = defaultUser.name
         production.text = defaultUser.production
         company.text = defaultUser.company
@@ -72,9 +73,6 @@ class UserViewController: UIViewController, UITextFieldDelegate {
         }
         
         print("User: \(defaultUser.name) Prod: \(defaultUser.production) CO: \(defaultUser.company)")
-        
-        // userToMain Segue done on storyboard
-        //performSegue(withIdentifier: "", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -83,5 +81,16 @@ class UserViewController: UIViewController, UITextFieldDelegate {
             controller.defaultUser = defaultUser
         }
     }
-
+    
+    // MARK: - Keyboard behavior functions
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        userName.resignFirstResponder()
+        production.resignFirstResponder()
+        company.resignFirstResponder()
+        return true
+    }
 }
