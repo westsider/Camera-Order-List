@@ -9,9 +9,10 @@
 //  feat: segue back to Main with new default user
 //  feat: func to dismiss keyboard on return & click away
 //  feat: design weather UI
-
 //  feat: design weather API
 //  feat: integrate weather api
+
+//  feat: integrate date picker
 
 import UIKit
 
@@ -29,9 +30,15 @@ class UserViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var weatherDisplay: UITextView!
     
+    @IBOutlet weak var dateTextField: UILabel!
+    
+    @IBOutlet weak var dateTextInput: UITextField!
+    
     let errorOne = "Please include a state or country"
     
     let errorTwo = "Please Enter a City and State or Country"
+    
+    var datePickerUtility = DatePickerUtility()
     
     var defaultUser: User!
     
@@ -128,6 +135,32 @@ class UserViewController: UIViewController, UITextFieldDelegate {
             
         }
     }
+    
+    //  MARK: - Activate date picker view
+    @IBAction func textFieldEditing(_ sender: UITextField) {
+        
+        let datePickerView:UIDatePicker = UIDatePicker()
+        
+        datePickerView.datePickerMode = UIDatePickerMode.date
+        
+        sender.inputView = datePickerView
+        
+        datePickerView.addTarget(self, action: #selector(UserViewController.datePickerValueChanged(sender:)), for: UIControlEvents.valueChanged)
+    }
+
+    //  MARK: - format the selected Date and update vars used in weather forcast
+    func datePickerValueChanged(sender:UIDatePicker) {
+        
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        
+        dateFormatter.timeStyle = DateFormatter.Style.none
+        
+        dateTextInput.text = dateFormatter.string(from: sender.date)
+        
+    }
+
 }
 
 

@@ -175,7 +175,7 @@ class GetWeather {
                         thisDate = String(forecastDate![i].month) + "/" + String(forecastDate![i].dayte)
                     }
                     // setting one line fore each day
-                    let newLine = thisDate + " " + element.low + " " + element.high + " " + element.conditions + "\r\n"
+                    let newLine = thisDate + "  " + element.low + "°-" + element.high + "°  " + element.conditions + "\r\n"
                     dateDetailArray.append(newLine)
                     
                     i = i + 1
