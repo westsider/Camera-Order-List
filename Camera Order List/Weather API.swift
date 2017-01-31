@@ -144,6 +144,8 @@ class GetWeather {
         
         var theWeather: String = ""
         
+        print("forecastURL- Weather API: \(CurrentLocation.sharedInstance.forcastURL)")
+        
         let task = URLSession.shared.dataTask(with: CurrentLocation.sharedInstance.forcastURL! as URL) {(data, response, error) in
             
             let json: [String: Any]?

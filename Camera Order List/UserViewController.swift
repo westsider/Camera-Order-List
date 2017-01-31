@@ -12,8 +12,10 @@
 //  feat: design weather API
 //  feat: integrate weather api
 //  feat: integrate date picker
-
 //  feat: add date to event object
+
+//  fix: 2 word city returns nil
+//  fix: need timout for weather api or error check in apiu
 
 import UIKit
 
@@ -50,7 +52,7 @@ class UserViewController: UIViewController, UITextFieldDelegate {
         self.production.delegate = self
         self.company.delegate = self
         self.dateTextInput.delegate = self
-        citySearch.text = "Santa Monica, CA"
+        citySearch.text = "San Francisco CA"
         print("VDL: Name: \(defaultUser.name)")
     }
     
@@ -119,6 +121,9 @@ class UserViewController: UIViewController, UITextFieldDelegate {
         weatherDisplay.text = "Launching Search..."
         
         activityDial.startAnimating()
+        
+        print("Text Input: \(citySearch.text)")
+        print("forecastURL: \(CurrentLocation.sharedInstance.forcastURL)")
         
         let searchResult  =  CurrentLocation.sharedInstance.parseCurrentLocation(input: citySearch.text!)
         weatherDisplay.text = searchResult

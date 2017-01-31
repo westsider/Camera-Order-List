@@ -86,10 +86,10 @@
 			isa = PBXGroup;
 			children = (
 				0D290A0F1DEF81AC004EB14A /* Equipment Classes.swift */,
-				0D32179F1E40F7E2006B68DA /* Date Picker.swift */,
 				0D32179B1E40F2F2006B68DA /* Location API.swift */,
 				0D32179D1E40F311006B68DA /* Weather API.swift */,
 				0DABF9451E03060A00628EC5 /* Keyboard Helpers.swift */,
+				0D32179F1E40F7E2006B68DA /* Date Picker.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
