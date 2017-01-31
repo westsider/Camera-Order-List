@@ -56,8 +56,8 @@
 //  use text input to name current array
 //  append event array ewhen new name is saved
 //  feat: proved item persists bettween segues back and forth
-
 //  *** Production info and weather report
+
 //  *** lens details
 //  *** Core Data persistence of Important objects
 //  *** Tutorial framework of alert views that page by, leave the instruction for later date
