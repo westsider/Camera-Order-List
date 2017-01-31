@@ -210,6 +210,11 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
 
         myTableView.reloadData()
         print("func addEquipmentAction exiting with: \(thisEvent.equipment)\n")
+        
+        // test funbc to select primes
+        let thisCompState = [myPicker.selectedRow(inComponent: 0),myPicker.selectedRow(inComponent: 1),myPicker.selectedRow(inComponent: 2),myPicker.selectedRow(inComponent: 3)]
+        let lenskit = setPrimesKit(compState: thisCompState) // unknown kit
+        print("Primes Selected: \(lenskit)")
     }
     
     // MARK: - Picker Convience Functions
