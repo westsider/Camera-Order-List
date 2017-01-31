@@ -11,8 +11,9 @@
 //  feat: design weather UI
 //  feat: design weather API
 //  feat: integrate weather api
-
 //  feat: integrate date picker
+
+//  feat: add date to event object
 
 import UIKit
 
@@ -48,7 +49,8 @@ class UserViewController: UIViewController, UITextFieldDelegate {
         self.userName.delegate = self
         self.production.delegate = self
         self.company.delegate = self
-        citySearch.text = "Venice, CA"
+        self.dateTextInput.delegate = self
+        citySearch.text = "Santa Monica, CA"
         print("VDL: Name: \(defaultUser.name)")
     }
     
@@ -56,6 +58,7 @@ class UserViewController: UIViewController, UITextFieldDelegate {
         userName.text = defaultUser.name
         production.text = defaultUser.production
         company.text = defaultUser.company
+        dateTextInput.text = defaultUser.date
     }
     
     override func didReceiveMemoryWarning() {
@@ -158,6 +161,8 @@ class UserViewController: UIViewController, UITextFieldDelegate {
         dateFormatter.timeStyle = DateFormatter.Style.none
         
         dateTextInput.text = dateFormatter.string(from: sender.date)
+        
+        defaultUser.date = dateFormatter.string(from: sender.date)
         
     }
 
