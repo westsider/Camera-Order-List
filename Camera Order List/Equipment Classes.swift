@@ -318,7 +318,7 @@ class Event {
         imageArray.append( UIImage(named: "manIcon")!)
         
         if equipment[0].isEmpty {
-            print("Its empty")
+            print("Equipment is empty")
             equipment.removeAll(keepingCapacity: true)
             equipment.append( ["1a", "Camera", "Arri", "Alexa"])
             print(equipment)

@@ -13,9 +13,9 @@
 //  feat: integrate weather api
 //  feat: integrate date picker
 //  feat: add date to event object
-
 //  fix: 2 word city returns nil
-//  fix: need timout for weather api or error check in apiu
+
+//  fix: need timout for weather api or error check in api
 
 import UIKit
 
@@ -94,7 +94,21 @@ class UserViewController: UIViewController, UITextFieldDelegate {
             defaultUser.company = company.text!
         }
         
-        print("User: \(defaultUser.name) Prod: \(defaultUser.production) CO: \(defaultUser.company)")
+        // change default text to date
+        if dateTextInput.text! == ""  {
+            print("Date Empty")
+        } else {
+            defaultUser.date = dateTextInput.text!
+        }
+        
+        // change default text to date
+        if citySearch.text! == ""  {
+            print("City Empty")
+        } else {
+            defaultUser.city = citySearch.text!
+        }
+        
+        print("Segue from User, Updating Default User... User: \(defaultUser.name) Prod: \(defaultUser.production) CO: \(defaultUser.company) Date: \(defaultUser.date) City: \(defaultUser.city))")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -113,6 +127,7 @@ class UserViewController: UIViewController, UITextFieldDelegate {
         userName.resignFirstResponder()
         production.resignFirstResponder()
         company.resignFirstResponder()
+        dateTextInput.resignFirstResponder()
         return true
     }
     
