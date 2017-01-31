@@ -197,6 +197,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         let comp3 = localPickerIndex[3][myPicker.selectedRow(inComponent: 3)]
         
          // populate the array for label verification and addition to the event
+        //          quantity,Type,maker,model
         equipment = [comp0, comp1, comp2, comp3]
     }
     

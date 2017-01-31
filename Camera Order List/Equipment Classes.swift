@@ -109,6 +109,75 @@ func setProbeModel(maker: MakerProbe) -> [String] {
     }
 }
 
+// add btn is pressed - get picker state and pass that into this func
+//  when comp 1 = row 1, comp 2 = row 0, comp 3 = 0
+//  what i need to get looks like nil, 1, 0, 0
+//  find picker state
+//  funcSetPrimesKit((comp2: 1, equip: e1) -  this will populate the lensTableview to "Zeiss", "Master Primes", "12mm, 18mm, 21mm, 35mm, 40mm, 50mm" ect
+func setPrimesKit(compState: Array<Int>)-> String {
+    // Zeiss Prime Section
+    var primes = "I dont know what this is"
+    // primes "Zeiss" "Master Primes"
+    if compState[1] == 1 && compState[2] == 0 && compState[3] == 0 {
+        primes = "12mm, 18mm, 21mm, 35mm, 40mm, Zeiss, ZMP"
+    }
+    
+    // primes "Zeiss" "ultra Primes"
+    if compState[1] == 1 && compState[2] == 0 && compState[3] == 1 {
+        primes = "12mm, 18mm, 21mm, 35mm, 40mm, Zeiss, ZUP"
+    }
+    
+    // primes "Zeiss" "super speeds"
+    if compState[1] == 1 && compState[2] == 0 && compState[3] == 2 {
+        primes = "12mm, 18mm, 21mm, 35mm, 40mm, Zeiss, ZSS"
+    }
+    
+    // Leica Prime Section
+    // primes "Leica" "Summilux-C"
+    if compState[1] == 1 && compState[2] == 1 && compState[3] == 0 {
+        primes = "12mm, 18mm, 21mm, 35mm, 40mm, Leica, Summilux-C"
+    }
+    
+    // primes "Leica" "Summicron-C"
+    if compState[1] == 1 && compState[2] == 1 && compState[3] == 1 {
+        primes = "12mm, 18mm, 21mm, 35mm, 40mm, Leica, Summicron-C"
+    }
+    
+    // primes "Leica" "Telephoto"
+    if compState[1] == 1 && compState[2] == 1 && compState[3] == 2 {
+        primes = "12mm, 18mm, 21mm, 35mm, 40mm, Leica, Telephoto"
+    }
+    
+    // Canon Prime Section
+    // primes "canon" "K-35"
+    if compState[1] == 1 && compState[2] == 2 && compState[3] == 0 {
+        primes = "12mm, 18mm, 21mm, 35mm, 40mm, Canon, K-35"
+    }
+    
+    // primes "Canon" "Telephoto"
+    if compState[1] == 1 && compState[2] == 2 && compState[3] == 1 {
+        primes = "12mm, 18mm, 21mm, 35mm, 40mm, Canon, Telephoto"
+    }
+    
+    // Cooke Prime Section
+    // primes "Cooke" "i5"
+    if compState[1] == 1 && compState[2] == 3 && compState[3] == 0 {
+        primes = "12mm, 18mm, 21mm, 35mm, 40mm, Cooke, i5"
+    }
+    
+    // primes "Cooke" "S4"
+    if compState[1] == 1 && compState[2] == 3 && compState[3] == 1 {
+        primes = "12mm, 18mm, 21mm, 35mm, 40mm, Cooke, S4"
+    }
+    
+    // primes "Cooke" "Speed Panchro"
+    if compState[1] == 1 && compState[2] == 3 && compState[3] == 2 {
+        primes = "12mm, 18mm, 21mm, 35mm, 40mm, Cooke, Speed Panchro"
+    }
+    
+    return primes
+}
+
 func setPickerArray(component: Int, row: Int, lastCatagory: Int ) -> [[String]]  {
     
     var equipmentArray:[[String]] = [Quantity, Catagory.allValues, MakerCamera.allValues, setCamModel(maker: .arri)]
@@ -121,7 +190,7 @@ func setPickerArray(component: Int, row: Int, lastCatagory: Int ) -> [[String]] 
             case 0:
                 equipmentArray = [Quantity, Catagory.allValues, MakerCamera.allValues,setCamModel(maker: .arri)] // cam
             case 1:
-                equipmentArray = [Quantity, Catagory.allValues, MakerPrimes.allValues,setPrimesModel(maker: .zeiss)] // priome
+                equipmentArray = [Quantity, Catagory.allValues, MakerPrimes.allValues,setPrimesModel(maker: .zeiss)] // prime
             case 2:
                 equipmentArray = [Quantity, Catagory.allValues, MakerMacros.allValues, setMacrosModel(maker: .arri)] // macro
             case 3:
