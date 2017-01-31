@@ -8,20 +8,30 @@
 //  feat: segue with tap on user row
 //  feat: segue back to Main with new default user
 //  feat: func to dismiss keyboard on return & click away
-
 //  feat: design weather UI
+
 //  feat: design weather API
 //  feat: integrate weather api
 
 import UIKit
 
 class UserViewController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var userName: UITextField!
     
     @IBOutlet weak var production: UITextField!
     
     @IBOutlet weak var company: UITextField!
+    
+    @IBOutlet weak var citySearch: UITextField!
+    
+    @IBOutlet weak var activityDial: UIActivityIndicatorView!
+    
+    @IBOutlet weak var weatherDisplay: UITextView!
+    
+    let errorOne = "Please include a state or country"
+    
+    let errorTwo = "Please Enter a City and State or Country"
     
     var defaultUser: User!
     
@@ -31,10 +41,10 @@ class UserViewController: UIViewController, UITextFieldDelegate {
         self.userName.delegate = self
         self.production.delegate = self
         self.company.delegate = self
-        
+        citySearch.text = "Venice, CA"
         print("VDL: Name: \(defaultUser.name)")
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         userName.text = defaultUser.name
         production.text = defaultUser.production
@@ -93,4 +103,33 @@ class UserViewController: UIViewController, UITextFieldDelegate {
         company.resignFirstResponder()
         return true
     }
+    
+    //  MARK: - Search Weather
+    @IBAction func searchWeather(_ sender: Any) {
+        weatherDisplay.text = "Launching Search..."
+        
+        activityDial.startAnimating()
+        
+        let searchResult  =  CurrentLocation.sharedInstance.parseCurrentLocation(input: citySearch.text!)
+        weatherDisplay.text = searchResult
+        
+        // if now parsing error call weather api in closure that returns a string for the UI
+        if searchResult != errorOne && searchResult !=  errorTwo {
+            
+            GetWeather().getForecast { (result: String) in
+                self.weatherDisplay.text = result
+                self.activityDial.stopAnimating()
+            }
+            
+        }  else {
+            
+            self.weatherDisplay.text = searchResult
+            self.activityDial.stopAnimating()
+            
+        }
+    }
 }
+
+
+
+
