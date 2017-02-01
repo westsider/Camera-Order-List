@@ -15,7 +15,7 @@
 //
 //  Comp 0 = Quantity Comp 1 = Catagory Comp 2 = Maker Comp 3 - Model
 //  looking for swifty smart way to populate picker wheel changes
-//  fix - reset wheel 2 to 0, when wheel 1 moves
+//  fix - reset wheel 2 to 0, when wheel 1 vares
 //  FIX: - error when comp 3 moves wrong model on comp 3
 //  populate text box
 //  create an equipment object
@@ -58,10 +58,10 @@
 //  feat: proved item persists bettween segues back and forth
 //  feat: Production info and weather report
 //  *** lens details Update UI,
-//  task: sequway to lens picker and segway back 
+//  task: sequway to lens picker and segway back
 
 //  task edit lenses with switches and update array
-//  task: update UI
+//  task: update tableview on main
 //  task: properly dispose old view controllers
 //  *** Navigation not properly desptroying views
 //  *** Core Data persistence of Important objects
@@ -73,7 +73,7 @@
 import UIKit
 
 class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource {
-
+    
     @IBOutlet weak var myPicker: UIPickerView!
     
     @IBOutlet weak var myTableView: UITableView!
@@ -95,7 +95,9 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     let cellIdentifier = "ListTableViewCell"
     
-    // MARK: - Lifecycle Functions  
+    var lenskit = [String]()
+    
+    // MARK: - Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
         //  populate Event before view appears
         //thisEvent = Event(user: defaultUser, equipment: [equipment], images: image)
@@ -123,7 +125,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
     }
     
-
+    
     
     // MARK: - Set up Picker
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -150,7 +152,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         // zero the picker wheels when Catagory changes
         zeroThePicker(component: component, row: row)
-
+        
         // fill the equipoment array and text field from picker choices
         populateEquipmentArray(component: component, row: row)
     }
@@ -166,14 +168,14 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         return pickerLabel
     }
     
-    // MARK: Set up Table View  
+    // MARK: Set up Table View
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return thisEvent.tableViewSize(tableViewArray: tableViewArray)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ListTableViewCell
         print("This is the array for tableView: \(tableViewArray)\n")
         cell.imageTableViewCell.image =  thisEvent.images[indexPath.row] //image[indexPath.row]
@@ -203,30 +205,38 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         // set up the picker component component state array
         let thisCompState = [myPicker.selectedRow(inComponent: 0),myPicker.selectedRow(inComponent: 1),myPicker.selectedRow(inComponent: 2),myPicker.selectedRow(inComponent: 3)]
         // find which lens kit goes with this state
-        let lenskit = setPrimesKit(compState: thisCompState) // unknown kit
+        lenskit = setPrimesKit(compState: thisCompState)// unknown kit
         print("Primes Selected: \(lenskit)")
         
         // populate the array for label verification and addition to the event
-        equipment = [comp0, comp1, comp2, comp3, lenskit]
+        //equipment = [comp0, comp1, comp2, comp3, lenskit]
+        equipment = [comp0, comp1, comp2, comp3, lenskit.joined()]
         
         print("Equipment array now includes lens kit: \(equipment)")
         
         
     }
     
+    
     // MARK: - Add equipment to Event and tableview
     @IBAction func addEquipmentAction(_ sender: Any) {
         
-// if this is a prime lens - segue to lenses
+        // if this is a prime lens - segue to lenses - pass lens kit array  - edit array with switches - pass lens kit aray back to main
         if myPicker.selectedRow(inComponent: 1) == 1 {
             // segue mainToLenses
-             //performSegue(withIdentifier: "MainToPastOrders", sender: self)
+            //performSegue(withIdentifier: "MainToPastOrders", sender: self)
             performSegue(withIdentifier: "mainToLenses", sender: self)
+            
+            
+            
+            
+            
         }
         
+        // else update array
         self.thisEvent.addEquipment(comp2: myPicker.selectedRow(inComponent: 1), equip: equipment)
         tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1) )
-
+        
         myTableView.reloadData()
         print("func addEquipmentAction exiting with: \(thisEvent.equipment)\n")
         
@@ -238,14 +248,14 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         switch component {  // reload only the next picker when prior wheel moves
         case 0:
-            break           //  dont reload because quantity changes
+        break           //  dont reload because quantity changes
         case 1:
             myPicker.reloadComponent(2)
             myPicker.reloadComponent(3)
         case 2:
             myPicker.reloadComponent(3)
         case 3:
-            break           //  dont reload becuase only the model changed
+        break           //  dont reload becuase only the model changed
         default:
             break
         }
@@ -253,7 +263,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     //  dont reload localPickerIndex when component 0 or 3 move
     func dontReloadOnComp0or3(component: Int, row: Int, lastCatagory: Int) {
-
+        
         if component == 1 || component == 2 {     //  full update on comp 1 and 2 only
             localPickerIndex = setPickerArray(component: component, row: row, lastCatagory: prevCatagory)
         }
@@ -278,6 +288,12 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             let controller = segue.destination as! UserViewController
             controller.defaultUser = defaultUser
             print("Segue with default user to Users VC")
+        }
+        
+        if segue.identifier == "mainToLenses" {
+            let controller = segue.destination as! LensesViewController
+            controller.lensKitArray = lenskit
+            
         }
     }
 }

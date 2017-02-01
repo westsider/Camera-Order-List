@@ -23,7 +23,13 @@ class LensesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     let cellIdentifier = "lensTableViewCell"
     
-    let demoLensArray =  ["1","2","3","4","5","6","7","8","9","10"]
+    var lensKitArray =  ["1","2","3","4","5","6","7","8","9","10"]
+    
+    var originalArray = [String]()
+    
+    var lensKitArrayEdited = [String]()
+    
+    //var removeArrayPosition = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +40,20 @@ class LensesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        originalArray = lensKitArray
+        lensKitArrayEdited = lensKitArray
+    }
+    
     @IBAction func updateAction(_ sender: Any) {
+       // self.dismiss(animated: false, completion: nil)
+        
+//        self.dismiss(animated: false) { 
+//            self.performSegue(withIdentifier: "lensesToMain", sender: self)
+//        }
         
         performSegue(withIdentifier: "lensesToMain", sender: self)
+        
     }
     
 
@@ -44,17 +61,45 @@ class LensesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return lensKitArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! lensTableViewCell
-        cell.lensLabel?.text = demoLensArray[indexPath.row]
+        cell.lensLabel?.text = lensKitArray[indexPath.row]
+        
+        // Send switch state and indexpath ro to this func?
+        cell.lensSwitch.tag = indexPath.row
+        cell.lensSwitch.restorationIdentifier = lensKitArray[indexPath.row]
+        cell.lensSwitch.addTarget(self, action: #selector(switchTriggered(sender:)), for: UIControlEvents.valueChanged)
+        
         return cell
         
     }
     
+    func switchTriggered(sender: UISwitch) {
+        
+        let index = sender.tag
+        let content = sender.restorationIdentifier!
+        
+        print("Lens Switch Index: \(index) For: \(content) Is On: \(sender.isOn)")
+        print("originalArray Size Is: \(originalArray.count) lensKitArray Size Is: \(lensKitArray.count)")
+        // dim row to grey
+
+        // remove  element from Edited Array
+        if sender.isOn != true {
+            lensKitArrayEdited.remove(at: index)
+            print("lensKitArrayEdited Removed \(lensKitArrayEdited)")
+        }
+        
+        // insert element to array
+        if sender.isOn {
+            lensKitArrayEdited.insert(content, at: index)
+            print("lensKitArrayEdited Added \(lensKitArrayEdited)")
+        }
+        
+    }
 
 
 }

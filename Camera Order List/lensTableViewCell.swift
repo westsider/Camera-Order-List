@@ -14,6 +14,8 @@ class lensTableViewCell: UITableViewCell {
     
     @IBOutlet weak var lensSwitch: UISwitch!
     
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,4 +27,10 @@ class lensTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func switchValueChanged(_ sender: Any) {
+//        lensSwitch.tag = 20000
+//        lensSwitch.addTarget(self, action: Selector(("SwitchTriggered")), for: UIControlEvents.valueChanged)
+//        
+//        print("Switch Changed: \(sender)")
+    }
 }
