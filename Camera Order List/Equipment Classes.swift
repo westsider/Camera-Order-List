@@ -328,8 +328,7 @@ class Event {
         self.equipment = equipment
         self.images = images
     }
-    
-    //  Append the equipment array inside the event class
+   
     func addEquipment(comp2: Int, equip: [String]){
         // replace the constructed array
         if equipment[0].isEmpty {
@@ -407,7 +406,8 @@ class Event {
             if  counter > 0  && ( equipment[counter][1] == "Primes" || equipment[counter][1] == "Macros" || equipment[counter][1] == "AKS"  || equipment[counter][1] == "Filters" || equipment[counter][1] == "Support" || equipment[counter][1] == "Probe Lens" )
             {
                 titleArray.append("\(equipment[counter][0]) \(equipment[counter][1]) \(equipment[counter][2]) \(equipment[counter][3])")
-                detailArray.append("Lenses Go Here")
+               // detailArray.append("Lenses Go Here")
+                 detailArray.append(equipment[counter][4])
             }
             
             counter += 1

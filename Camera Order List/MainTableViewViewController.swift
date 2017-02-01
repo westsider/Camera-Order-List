@@ -56,10 +56,12 @@
 //  use text input to name current array
 //  append event array ewhen new name is saved
 //  feat: proved item persists bettween segues back and forth
-//  *** Production info and weather report
+//  feat: Production info and weather report
 
 //  *** lens details
+//  *** Navigation not properly desptroying views
 //  *** Core Data persistence of Important objects
+//  *** Share Equipment Order
 //  *** Tutorial framework of alert views that page by, leave the instruction for later date
 
 //  **** After all of the app is working finish adding all of the equipment
@@ -195,26 +197,37 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         let comp1 = localPickerIndex[1][myPicker.selectedRow(inComponent: 1)]
         let comp2 = localPickerIndex[2][myPicker.selectedRow(inComponent: 2)]
         let comp3 = localPickerIndex[3][myPicker.selectedRow(inComponent: 3)]
+// Refactor: - Dont need to create the comp state twice
+        // now adding lens kit to equipment array
+        // set up the picker component component state array
+        let thisCompState = [myPicker.selectedRow(inComponent: 0),myPicker.selectedRow(inComponent: 1),myPicker.selectedRow(inComponent: 2),myPicker.selectedRow(inComponent: 3)]
+        // find which lens kit goes with this state
+        let lenskit = setPrimesKit(compState: thisCompState) // unknown kit
+        print("Primes Selected: \(lenskit)")
         
          // populate the array for label verification and addition to the event
         //          quantity,Type,maker,model
-        equipment = [comp0, comp1, comp2, comp3]
+        equipment = [comp0, comp1, comp2, comp3, lenskit]
+        
+        print("Equipment array now includes lens kit: \(equipment)")
+        
+        
     }
     
     // MARK: - Add equipment to Event and tableview
     @IBAction func addEquipmentAction(_ sender: Any) {
         
-        //self.thisEvent.equipment.append(equipment)
         self.thisEvent.addEquipment(comp2: myPicker.selectedRow(inComponent: 1), equip: equipment)
         tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1) )
 
         myTableView.reloadData()
         print("func addEquipmentAction exiting with: \(thisEvent.equipment)\n")
         
-        // test funbc to select primes
-        let thisCompState = [myPicker.selectedRow(inComponent: 0),myPicker.selectedRow(inComponent: 1),myPicker.selectedRow(inComponent: 2),myPicker.selectedRow(inComponent: 3)]
-        let lenskit = setPrimesKit(compState: thisCompState) // unknown kit
-        print("Primes Selected: \(lenskit)")
+       
+        
+        //  task: populate tableview with lenses need to modify add equipment
+        // self.thisEvent.addEquipment(comp2: myPicker.selectedRow(inComponent: 1), equip: equipment)
+        
     }
     
     // MARK: - Picker Convience Functions

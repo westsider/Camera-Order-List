@@ -28,6 +28,7 @@ class PastOrdersViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "S A V E / L O A D"
         eventsTableView.delegate = self
         eventsTableView.dataSource = self
     }

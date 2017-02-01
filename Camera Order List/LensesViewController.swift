@@ -6,8 +6,8 @@
 //  Copyright © 2017 Warren Hansen. All rights reserved.
 //
 //  task: Add Tableview with switches
+//  task: create lens objects for each prime lens
 
-//  task: create lens objects for each lens
 //  task: populate tableview with lenses
 //  task: activate switched to modify order
 //  task: add segue to lens selection

@@ -52,6 +52,7 @@ class UserViewController: UIViewController, UITextFieldDelegate {
         self.production.delegate = self
         self.company.delegate = self
         self.dateTextInput.delegate = self
+        title = "J O B  I N F O"
         // fill in city from previous use on this VC
         if defaultUser.city != "" {
             citySearch.text = defaultUser.city
