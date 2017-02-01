@@ -124,9 +124,6 @@
                                 <state key="normal" title="Send">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="Tws-hP-DtX" kind="show" id="TAs-q5-rtH"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -158,6 +155,7 @@
                         <outlet property="myPicker" destination="E3n-ge-Oib" id="O2B-PJ-DvS"/>
                         <outlet property="myTableView" destination="Ag3-Qp-JVS" id="rgo-JC-OwM"/>
                         <segue destination="uPg-rF-zXE" kind="show" identifier="mainToUser" id="Udl-S7-gda"/>
+                        <segue destination="Tws-hP-DtX" kind="show" identifier="mainToLenses" id="awf-vA-op8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -252,6 +250,7 @@
                                 <state key="normal" title="Update"/>
                                 <connections>
                                     <action selector="updateAction:" destination="uPg-rF-zXE" eventType="touchUpInside" id="Vb2-h8-3PR"/>
+                                    <action selector="updateAction:" destination="Tws-hP-DtX" eventType="touchUpInside" id="kTT-BY-dtX"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -279,11 +278,12 @@
                     </view>
                     <connections>
                         <outlet property="lensTableView" destination="ReE-Bh-fIF" id="hPx-sC-UOp"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="lensesToMain" id="WlN-rt-APW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="feO-OG-oGq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2013.5999999999999" y="821.73913043478262"/>
+            <point key="canvasLocation" x="1726" y="918"/>
         </scene>
         <!--Past Orders View Controller-->
         <scene sceneID="6D4-Aj-KNQ">
@@ -617,6 +617,6 @@
         <image name="myAppIcon" width="90" height="90"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6Sa-ij-yPO"/>
+        <segue reference="WlN-rt-APW"/>
     </inferredMetricsTieBreakers>
 </document>

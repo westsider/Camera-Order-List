@@ -33,8 +33,14 @@ class LensesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.lensTableView.delegate = self
         
     }
+    
+    @IBAction func updateAction(_ sender: Any) {
+        
+        performSegue(withIdentifier: "lensesToMain", sender: self)
+    }
+    
 
-    // MARK: - Set up tableview
+    // MARK: - Set up tableview  lensesToMain
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         

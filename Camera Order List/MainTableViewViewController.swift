@@ -57,8 +57,12 @@
 //  append event array ewhen new name is saved
 //  feat: proved item persists bettween segues back and forth
 //  feat: Production info and weather report
+//  *** lens details Update UI,
+//  task: sequway to lens picker and segway back 
 
-//  *** lens details
+//  task edit lenses with switches and update array
+//  task: update UI
+//  task: properly dispose old view controllers
 //  *** Navigation not properly desptroying views
 //  *** Core Data persistence of Important objects
 //  *** Share Equipment Order
@@ -117,7 +121,6 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         //performSegue(withIdentifier: "MainToPastOrders", sender: self)
         
-
     }
     
 
@@ -197,16 +200,13 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         let comp1 = localPickerIndex[1][myPicker.selectedRow(inComponent: 1)]
         let comp2 = localPickerIndex[2][myPicker.selectedRow(inComponent: 2)]
         let comp3 = localPickerIndex[3][myPicker.selectedRow(inComponent: 3)]
-// Refactor: - Dont need to create the comp state twice
-        // now adding lens kit to equipment array
         // set up the picker component component state array
         let thisCompState = [myPicker.selectedRow(inComponent: 0),myPicker.selectedRow(inComponent: 1),myPicker.selectedRow(inComponent: 2),myPicker.selectedRow(inComponent: 3)]
         // find which lens kit goes with this state
         let lenskit = setPrimesKit(compState: thisCompState) // unknown kit
         print("Primes Selected: \(lenskit)")
         
-         // populate the array for label verification and addition to the event
-        //          quantity,Type,maker,model
+        // populate the array for label verification and addition to the event
         equipment = [comp0, comp1, comp2, comp3, lenskit]
         
         print("Equipment array now includes lens kit: \(equipment)")
@@ -217,16 +217,18 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     // MARK: - Add equipment to Event and tableview
     @IBAction func addEquipmentAction(_ sender: Any) {
         
+// if this is a prime lens - segue to lenses
+        if myPicker.selectedRow(inComponent: 1) == 1 {
+            // segue mainToLenses
+             //performSegue(withIdentifier: "MainToPastOrders", sender: self)
+            performSegue(withIdentifier: "mainToLenses", sender: self)
+        }
+        
         self.thisEvent.addEquipment(comp2: myPicker.selectedRow(inComponent: 1), equip: equipment)
         tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1) )
 
         myTableView.reloadData()
         print("func addEquipmentAction exiting with: \(thisEvent.equipment)\n")
-        
-       
-        
-        //  task: populate tableview with lenses need to modify add equipment
-        // self.thisEvent.addEquipment(comp2: myPicker.selectedRow(inComponent: 1), equip: equipment)
         
     }
     
