@@ -185,20 +185,20 @@ func setPrimesKit(compState: Array<Int>)-> [String] {
 //  clean up erased code
 //  task: add tableview array  to  equipmentObject
 //  task: add lens kit array to equipmentObject
-
 //  task: add thisCompState = [Int]() to equipmentObject
+
 //  task: add equipment = [String]() to equipmentObject
 //  now i have only 1 object to persist
 //  task: make the equipmentObject global until I can persist
 //  task: pass the edited lens kit back to the main VC
 
 struct equipmentObject {
-    // unify picker content
+    
+    // refactored all equipment vars to one object
     var pickerArray = [Quantity, Catagory.allValues, MakerCamera.allValues,setCamModel(maker: .arri)]
-    // unify tableview content
     var tableViewArray = [[String]]()
-    // unifu lenskit content
     var lenskit = [String]()
+    var thisCompState = [Int]()
     
      mutating func setPickerArray(component: Int, row: Int, lastCatagory: Int )   {
 

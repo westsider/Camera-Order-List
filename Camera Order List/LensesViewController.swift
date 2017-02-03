@@ -60,9 +60,9 @@ class LensesViewController: UIViewController, UITableViewDelegate, UITableViewDa
             //controller.lenskit = lensKitArrayEdited no longer cotroller item - global item
             
             //  update Event
-            thisEvent.addEquipment(comp2: thisCompState[1], equip: equipment)
+            thisEvent.addEquipment(comp2: myEquipment.thisCompState[1], equip: equipment)
             // update table view array
-            myEquipment.tableViewArray = thisEvent.populateTableview(catagory: thisCompState[1])
+            myEquipment.tableViewArray = thisEvent.populateTableview(catagory: myEquipment.thisCompState[1])
             print("Segue with new lens kit to Main VC")
         }
     }

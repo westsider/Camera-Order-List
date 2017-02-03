@@ -74,7 +74,7 @@ import UIKit
 
 var thisEvent: Event!   //  ? = nil until View Did Load global until core data
 
-var thisCompState = [Int]()
+//var thisCompState = [Int]()
 
 var equipment = [String]()
 
@@ -209,9 +209,9 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         let comp2 = myEquipment.pickerArray[2][myPicker.selectedRow(inComponent: 2)]
         let comp3 = myEquipment.pickerArray[3][myPicker.selectedRow(inComponent: 3)]
         // set up the picker component component state array
-        thisCompState = [myPicker.selectedRow(inComponent: 0),myPicker.selectedRow(inComponent: 1),myPicker.selectedRow(inComponent: 2),myPicker.selectedRow(inComponent: 3)]
+        myEquipment.thisCompState = [myPicker.selectedRow(inComponent: 0),myPicker.selectedRow(inComponent: 1),myPicker.selectedRow(inComponent: 2),myPicker.selectedRow(inComponent: 3)]
         // find which lens kit goes with this state
-        myEquipment.lenskit = setPrimesKit(compState: thisCompState)// unknown kit
+        myEquipment.lenskit = setPrimesKit(compState: myEquipment.thisCompState)// unknown kit
         print("Primes Selected: \(myEquipment.lenskit)")
         
         // populate the array for label verification and addition to the event

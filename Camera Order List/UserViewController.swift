@@ -57,7 +57,7 @@ class UserViewController: UIViewController, UITextFieldDelegate {
         if defaultUser.city != "" {
             citySearch.text = defaultUser.city
         } else {
-            citySearch.text = "San Francisco CA"
+            citySearch.text = "Santa Monica CA"
         }
         
         print("VDL: Name: \(defaultUser.name)")
