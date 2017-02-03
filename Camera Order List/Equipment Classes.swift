@@ -178,28 +178,46 @@ func setPrimesKit(compState: Array<Int>)-> [String] {
     return primes
 }
 
-//  the problem: i have created a local Main VC object that is really hard to update
-//  maake an equipmentObject to only update
-//  setPickerArray inside equipmentObject
-//  make a local picker array [[String]]
-//  clean up erased code
-//  task: add tableview array  to  equipmentObject
-//  task: add lens kit array to equipmentObject
-//  task: add thisCompState = [Int]() to equipmentObject
-//  task: add equipment = [String]() to equipmentObject
-
-//  now i have only 1 object to persist
-
-//  task: pass the edited lens kit back to the main VC
-
 struct equipmentObject {
     
-    // refactored all equipment vars to one object
+    // refactored all equipment vars to main object
+    /// Array to only fill the 4 wheel picker
     var pickerArray = [Quantity, Catagory.allValues, MakerCamera.allValues,setCamModel(maker: .arri)]
+    /// Holds a 2D array to populate Title + Detail correctly in a tableview E.G.    [["Warren Hansen Director of Photography", "1 Camera", "1 Primes Zeiss Master Primes"], ["Camera Order Nike 12 / 20 / 2016", "Arri Alexa", "12mm18mm21mm35mm40mmZeiss ZMP"]]
     var tableViewArray = [[String]]()
     var lenskit = [String]()
     var thisCompState = [Int]()
+    /// Holds one line of equipmet E.G.  ["1", "Primes", "Zeiss", "Master Primes", "12mm, 18mm, 21mm, 35mm, 40mm, Zeiss ZMP"]
     var equipment = [String]()
+    
+    // need to update tablviewarray   thisEvent.updateLensKit in myEquipment.equipment[4]
+    
+    /// update lens kit for tableview and equipment arrays
+    mutating func updateLensKit(update: String) {
+        myEquipment.equipment[4] = update
+        youShoudSeeThis(say: "updateLensKit func changed equipment", see: equipment as AnyObject)
+        
+        print("\nequipmet: \(equipment)\n")
+        
+        let tableViewRow = myEquipment.tableViewArray.count - 1
+        print("myEquipment.tableViewArray.count \(tableViewRow)")
+        
+        //  print("\ntableViewArray 0: \(tableViewArray[0])\n")
+        //  print("\ntableViewArray 1: \(tableViewArray[1])\n")
+        print("\ntableViewArray 1, 2: \(myEquipment.tableViewArray[tableViewRow][2])\n")
+        
+        myEquipment.tableViewArray[tableViewRow][2] = update
+        
+        print("\ntableViewArray 1, 2: \(myEquipment.tableViewArray[tableViewRow][2])\n")
+        
+        youShoudSeeThis(say: "myEquipment.tableViewArray:", see: myEquipment.tableViewArray as AnyObject)
+    // how to I count the lelments in tableViewArray?
+        
+        
+        
+        // neeed a print statremnt that hows me hjow this array is structured so I can update just the kit
+    }
+    // myEquipment.equipment[4]
     
      mutating func setPickerArray(component: Int, row: Int, lastCatagory: Int )   {
 
@@ -352,7 +370,7 @@ class Event {
    
     func addEquipment(comp2: Int, equip: [String]){
         // replace the constructed array
-        if equipment[0].isEmpty {
+        if equipment[0].isEmpty { 
             equipment.removeAll(keepingCapacity: true)
             equipment.append(equip)
             self.images.append(setTableViewIcon(catagory: comp2))
@@ -360,6 +378,16 @@ class Event {
             self.equipment.append(equip)
             self.images.append(setTableViewIcon(catagory: comp2))
         }
+    }
+    
+    func editLensArray(equip: [String], replace: [String]) {
+            //  print("************************************ \n")
+            //  print("editLensArray: myEquipment.equipment[String] passes in \(equip) \n")
+        var editedArray = equip
+        editedArray[4] = "New lens kit"
+            //  print("editedArray: \(editedArray)")
+            //  print("lensarraykitEdited \()")
+        
     }
     
     func setTableViewIcon(catagory: Int)-> UIImage {
@@ -407,10 +435,10 @@ class Event {
         imageArray.append( UIImage(named: "manIcon")!)
         
         if equipment[0].isEmpty {
-            print("Equipment is empty")
+                //  print("Equipment is empty")
             equipment.removeAll(keepingCapacity: true)
             equipment.append( ["1a", "Camera", "Arri", "Alexa"])
-            print(equipment)
+                //  print(equipment)
         }
         
         var counter = 0
@@ -428,7 +456,9 @@ class Event {
             {
                 titleArray.append("\(equipment[counter][0]) \(equipment[counter][1]) \(equipment[counter][2]) \(equipment[counter][3])")
                // detailArray.append("Lenses Go Here")
-                 detailArray.append(equipment[counter][4])
+               //  detailArray.append(equipment[counter][4])
+                // here is where I add the edited prime lens kit
+                detailArray.append(myEquipment.equipment[4])
             }
             
             counter += 1
@@ -459,6 +489,12 @@ class Event {
             return tableViewArray.count
         }
     }
+}
+
+func youShoudSeeThis(say: String, see: AnyObject ) {
+    
+    print("\n\(say) \(see)")
+    
 }
 
 

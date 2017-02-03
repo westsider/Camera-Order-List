@@ -60,6 +60,7 @@
 //  *** lens details Update UI,
 //  task: sequway to lens picker and segway back
 //  task edit lenses with switches and update array
+//  task: pass the edited lens kit back to the main VC
 
 //  task: update tableview on main
 //  task: properly dispose old view controllers
@@ -68,17 +69,11 @@
 //  *** Share Equipment Order
 //  *** Tutorial framework of alert views that page by, leave the instruction for later date
 
-//  **** After all of the app is working finish adding all of the equipment
+//  **** After all of the app is working, finish adding all of the equipment
 
 import UIKit
 
 var thisEvent: Event!   //  ? = nil until View Did Load global until core data
-
-// var thisCompState = [Int]()
-
-// var equipment = [String]()
-
-//  var tableViewArray = [[String]]()
 
 var myEquipment = equipmentObject()
 
@@ -102,18 +97,35 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     // MARK: - Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
-        //  populate Event before view appears
-        thisEvent = Event(eventName: "Passed In Current", user: defaultUser, equipment: [myEquipment.equipment], images: image)
-        thisEvent.images.append(thisEvent.user.icon)
+
         
-        // populate eaquipment and tableView array before view appears
-        populateEquipmentArray(component: 0, row: 0)
-        
-        // populate tabbleViewArray with User
-        //tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1))
-        myEquipment.tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1))
-        
-        myEquipment.setPickerArray(component: 0, row: 0, lastCatagory: 0)
+        // if this is first launch
+        if myEquipment.tableViewArray.isEmpty {
+            //  populate Event before view appears
+            thisEvent = Event(eventName: "Passed In Current", user: defaultUser, equipment: [myEquipment.equipment], images: image)
+            thisEvent.images.append(thisEvent.user.icon)
+            
+            // populate eaquipment and tableView array before view appears
+            populateEquipmentArray(component: 0, row: 0)
+            
+            // populate tabbleViewArray with User
+            myEquipment.tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1))
+            youShoudSeeThis(say: "1st Launch TableviewArray", see: myEquipment.tableViewArray as AnyObject)
+        } else {
+            
+            youShoudSeeThis(say: "Returning to Main View - viewWillAppear -  TableviewArray", see: myEquipment.tableViewArray as AnyObject)
+            
+            // populate eaquipment and tableView array before view appears
+            populateEquipmentArray(component: 0, row: 0)
+            
+            // populate tabbleViewArray with User - did this in lenses VC
+            //myEquipment.tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1))
+            
+            //  myEquipment.setPickerArray(component: 0, row: 0, lastCatagory: 0)
+            
+            youShoudSeeThis(say: "After Update - viewWillAppear -  TableviewArray", see: myEquipment.tableViewArray as AnyObject)
+        }
+       
         
         myTableView.reloadData()
     }
@@ -183,7 +195,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ListTableViewCell
-        print("This is the array for tableView: \(myEquipment.tableViewArray)\n")
+            //  print("This is the array for tableView in Main: \(myEquipment.tableViewArray)\n")
         cell.imageTableViewCell.image =  thisEvent.images[indexPath.row] //image[indexPath.row]
         cell.titleTableView?.text = myEquipment.tableViewArray[0][indexPath.row]
         cell.detailTableView?.text = myEquipment.tableViewArray[1][indexPath.row]
@@ -193,7 +205,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     // MARK: - Segue to User VC
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            print("Row: \(indexPath.row) segue to User")
+            //  print("Row: \(indexPath.row) segue to User")
             
             performSegue(withIdentifier: "mainToUser", sender: self)
         }
@@ -212,31 +224,45 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         myEquipment.thisCompState = [myPicker.selectedRow(inComponent: 0),myPicker.selectedRow(inComponent: 1),myPicker.selectedRow(inComponent: 2),myPicker.selectedRow(inComponent: 3)]
         // find which lens kit goes with this state
         myEquipment.lenskit = setPrimesKit(compState: myEquipment.thisCompState)// unknown kit
-        print("Primes Selected: \(myEquipment.lenskit)")
+            //print("Primes Selected: \(myEquipment.lenskit)")
         
         // populate the array for label verification and addition to the event
         myEquipment.equipment = [comp0, comp1, comp2, comp3, myEquipment.lenskit.joined()]
-        print("Equipment array now includes lens kit: \(myEquipment.equipment)")
+            //  print("Equipment array now includes lens kit: \(myEquipment.equipment)")
     }
     
-    
+    /****************************************************************************
+    /
+    /       TROUBLESOME SEGUE TO LENSES
+    /
+    ****************************************************************************/
     // MARK: - Add equipment to Event and tableview
     @IBAction func addEquipmentAction(_ sender: Any) {
         
         // if this is a prime lens - segue to lenses - pass lens kit array  - edit array with switches - pass lens kit aray back to main
         if myPicker.selectedRow(inComponent: 1) == 1 {
+            // update equipment and event
+//            thisEvent.addEquipment(comp2: myPicker.selectedRow(inComponent: 1), equip: myEquipment.equipment)
+//            myEquipment.tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1) )
             // segue mainToLenses
             performSegue(withIdentifier: "mainToLenses", sender: self)
  
         }
         
         // else update array
+        
         thisEvent.addEquipment(comp2: myPicker.selectedRow(inComponent: 1), equip: myEquipment.equipment)
+        
         myEquipment.tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1) )
+        
+        
+        
         myTableView.reloadData()
-        print("func addEquipmentAction exiting with: \(thisEvent.equipment)\n")
+            //  print("func addEquipmentAction exiting with: \(thisEvent.equipment)\n")
         
     }
+    
+    // unused button to test thisEvent.editLensArray
     
     // MARK: - Picker Convience Functions
     // MARK: - call a reload on text in picker UI  depending on the component switched
@@ -285,14 +311,14 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         if segue.identifier == "mainToUser" {
             let controller = segue.destination as! UserViewController
             controller.defaultUser = defaultUser
-            print("Segue with default user to Users VC")
+                //  print("Segue with default user to Users VC")
         }
         
-        if segue.identifier == "mainToLenses" {
-            let controller = segue.destination as! LensesViewController
-            controller.lensKitArray = myEquipment.lenskit
-            
-        }
+//        if segue.identifier == "mainToLenses" {
+//            let controller = segue.destination as! LensesViewController
+//            controller.lensKitArray = myEquipment.lenskit
+//            
+//        }
     }
 }
 
