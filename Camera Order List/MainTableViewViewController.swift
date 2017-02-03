@@ -82,6 +82,7 @@ var equipment = [String]()
 
 var myEquipment = equipmentObject()
 
+
 class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var myPicker: UIPickerView!
@@ -97,7 +98,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     let cellIdentifier = "ListTableViewCell"
     
-    var lenskit = [String]()
+    // var lenskit = [String]()
     
     // MARK: - Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
@@ -210,11 +211,11 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         // set up the picker component component state array
         thisCompState = [myPicker.selectedRow(inComponent: 0),myPicker.selectedRow(inComponent: 1),myPicker.selectedRow(inComponent: 2),myPicker.selectedRow(inComponent: 3)]
         // find which lens kit goes with this state
-        lenskit = setPrimesKit(compState: thisCompState)// unknown kit
-        print("Primes Selected: \(lenskit)")
+        myEquipment.lenskit = setPrimesKit(compState: thisCompState)// unknown kit
+        print("Primes Selected: \(myEquipment.lenskit)")
         
         // populate the array for label verification and addition to the event
-        equipment = [comp0, comp1, comp2, comp3, lenskit.joined()]
+        equipment = [comp0, comp1, comp2, comp3, myEquipment.lenskit.joined()]
         print("Equipment array now includes lens kit: \(equipment)")
     }
     
@@ -274,6 +275,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
     }
     
+    // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "mainToPriorOrders" {
             let controller = segue.destination as! PastOrdersViewController
@@ -288,7 +290,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         if segue.identifier == "mainToLenses" {
             let controller = segue.destination as! LensesViewController
-            controller.lensKitArray = lenskit
+            controller.lensKitArray = myEquipment.lenskit
             
         }
     }

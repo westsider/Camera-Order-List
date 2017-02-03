@@ -29,7 +29,6 @@ class LensesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var lensKitArrayEdited = [String]()
     
-    //var removeArrayPosition = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +46,8 @@ class LensesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBAction func updateAction(_ sender: Any) {
         
+        myEquipment.lenskit = lensKitArrayEdited
+        
         performSegue(withIdentifier: "lensesToMain", sender: self)
         
         // pass back lensKitArrayEdited to lensKIT
@@ -54,9 +55,10 @@ class LensesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "lensesToMain" {
-            let controller = segue.destination as! MainTableViewController
+            //let controller = segue.destination as! MainTableViewController
             // update lens kit
-            controller.lenskit = lensKitArrayEdited
+            //controller.lenskit = lensKitArrayEdited no longer cotroller item - global item
+            
             //  update Event
             thisEvent.addEquipment(comp2: thisCompState[1], equip: equipment)
             // update table view array

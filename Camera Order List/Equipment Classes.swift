@@ -184,22 +184,22 @@ func setPrimesKit(compState: Array<Int>)-> [String] {
 //  make a local picker array [[String]]
 //  clean up erased code
 //  task: add tableview array  to  equipmentObject
+//  task: add lens kit array to equipmentObject
 
-//  task: delete tableview array
-//  task: add lens kit array to  equipmentObject
-//  task: delete lens kit array
+//  task: add thisCompState = [Int]() to equipmentObject
+//  task: add equipment = [String]() to equipmentObject
 //  now i have only 1 object to persist
 //  task: make the equipmentObject global until I can persist
 //  task: pass the edited lens kit back to the main VC
 
 struct equipmentObject {
-    // populate picker
+    // unify picker content
     var pickerArray = [Quantity, Catagory.allValues, MakerCamera.allValues,setCamModel(maker: .arri)]
-    // populate tableview
+    // unify tableview content
     var tableViewArray = [[String]]()
+    // unifu lenskit content
+    var lenskit = [String]()
     
-    // add tableview array
-    //  add lens kit array
      mutating func setPickerArray(component: Int, row: Int, lastCatagory: Int )   {
 
         if component < 3 {
