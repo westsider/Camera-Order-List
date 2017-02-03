@@ -18,8 +18,6 @@ class PastOrdersViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var equipment = [String]()
     
-//    var defaultUser = User(name: "Warren Hansen", production: "Nike", company: "CO3", city: "SantaMonica", date: "12 / 20 / 2016", weather: "Sunny 72", icon: UIImage(named: "manIcon")!)
-    
     var image = [UIImage]()
 
     @IBOutlet weak var eventsTableView: UITableView!
@@ -58,11 +56,8 @@ class PastOrdersViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func saveEvent(_ sender: Any) {
         
         let textInput = eventNameInput.text
-        
         newEvent.eventName = textInput!
         tableViewTitleArray.insert(newEvent.eventName, at: 0)
-        //tableViewTitleArray.append(newEvent.eventName)
-        //allEvents.append(newEvent)
         allEvents.insert(newEvent, at: 0)
         eventsTableView.reloadData()
         

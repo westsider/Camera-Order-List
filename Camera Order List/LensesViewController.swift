@@ -60,7 +60,7 @@ class LensesViewController: UIViewController, UITableViewDelegate, UITableViewDa
             //  update Event
             thisEvent.addEquipment(comp2: thisCompState[1], equip: equipment)
             // update table view array
-            tableViewArray = thisEvent.populateTableview(catagory: thisCompState[1])
+            myEquipment.tableViewArray = thisEvent.populateTableview(catagory: thisCompState[1])
             print("Segue with new lens kit to Main VC")
         }
     }

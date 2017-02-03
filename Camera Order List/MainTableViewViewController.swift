@@ -78,7 +78,9 @@ var thisCompState = [Int]()
 
 var equipment = [String]()
 
-var tableViewArray = [[String]]()
+//  var tableViewArray = [[String]]()
+
+var myEquipment = equipmentObject()
 
 class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource {
     
@@ -88,9 +90,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     // MARK - Decalare User array and Event
     var prevCatagory = 0
-    
-    var myEquipment = equipmentObject()
-    
+
     var defaultUser = User(name: "Warren Hansen", production: "Nike", company: "CO3", city: "SantaMonica", date: "12 / 20 / 2016", weather: "Sunny 72", icon: UIImage(named: "manIcon")!)
     
     var image = [UIImage]()
@@ -109,7 +109,8 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         populateEquipmentArray(component: 0, row: 0)
         
         // populate tabbleViewArray with User
-        tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1))
+        //tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1))
+        myEquipment.tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1))
         
         myEquipment.setPickerArray(component: 0, row: 0, lastCatagory: 0)
         
@@ -175,16 +176,16 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     // MARK: Set up Table View
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return thisEvent.tableViewSize(tableViewArray: tableViewArray)
+        return thisEvent.tableViewSize(tableViewArray: myEquipment.tableViewArray)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ListTableViewCell
-        print("This is the array for tableView: \(tableViewArray)\n")
+        print("This is the array for tableView: \(myEquipment.tableViewArray)\n")
         cell.imageTableViewCell.image =  thisEvent.images[indexPath.row] //image[indexPath.row]
-        cell.titleTableView?.text = tableViewArray[0][indexPath.row]
-        cell.detailTableView?.text = tableViewArray[1][indexPath.row]
+        cell.titleTableView?.text = myEquipment.tableViewArray[0][indexPath.row]
+        cell.detailTableView?.text = myEquipment.tableViewArray[1][indexPath.row]
         return cell
     }
     
@@ -230,8 +231,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         // else update array
         thisEvent.addEquipment(comp2: myPicker.selectedRow(inComponent: 1), equip: equipment)
-        tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1) )
-        
+        myEquipment.tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1) )
         myTableView.reloadData()
         print("func addEquipmentAction exiting with: \(thisEvent.equipment)\n")
         

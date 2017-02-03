@@ -183,14 +183,20 @@ func setPrimesKit(compState: Array<Int>)-> [String] {
 //  setPickerArray inside equipmentObject
 //  make a local picker array [[String]]
 //  clean up erased code
+//  task: add tableview array  to  equipmentObject
 
-//  add tableview array  to  equipmentObject
-//  add lens kit array to  equipmentObject
-//  then at least i have only 1 object to persist
+//  task: delete tableview array
+//  task: add lens kit array to  equipmentObject
+//  task: delete lens kit array
+//  now i have only 1 object to persist
+//  task: make the equipmentObject global until I can persist
+//  task: pass the edited lens kit back to the main VC
 
 struct equipmentObject {
-    
+    // populate picker
     var pickerArray = [Quantity, Catagory.allValues, MakerCamera.allValues,setCamModel(maker: .arri)]
+    // populate tableview
+    var tableViewArray = [[String]]()
     
     // add tableview array
     //  add lens kit array
@@ -287,7 +293,7 @@ func setTableViewIcon(catagory: Int)-> UIImage {
     
     switch catagory {
     case 0: //  .camera:
-        thisImage = UIImage(named: "cameraIcon")!
+        thisImage = UIImage(named: "cameraIcon")!       // change this switch to ranges
     case 1: //  .primes:
         thisImage = UIImage(named: "lensIcon")!
     case 2: //  .macros:
