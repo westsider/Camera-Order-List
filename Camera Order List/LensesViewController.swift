@@ -7,9 +7,9 @@
 //
 //  task: Add Tableview with switches
 //  task: create lens objects for each prime lens
-
 //  task: populate tableview with lenses
 //  task: activate switched to modify order
+
 //  task: add segue to lens selection
 //  task: add button / segue back to main
 //  task: update the default user./ equipment order object
@@ -46,16 +46,24 @@ class LensesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     @IBAction func updateAction(_ sender: Any) {
-       // self.dismiss(animated: false, completion: nil)
-        
-//        self.dismiss(animated: false) { 
-//            self.performSegue(withIdentifier: "lensesToMain", sender: self)
-//        }
         
         performSegue(withIdentifier: "lensesToMain", sender: self)
         
+        // pass back lensKitArrayEdited to lensKIT
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "lensesToMain" {
+            let controller = segue.destination as! MainTableViewController
+            // update lens kit
+            controller.lenskit = lensKitArrayEdited
+            //  update Event
+            thisEvent.addEquipment(comp2: thisCompState[1], equip: equipment)
+            // update table view array
+            tableViewArray = thisEvent.populateTableview(catagory: thisCompState[1])
+            print("Segue with new lens kit to Main VC")
+        }
+    }
 
     // MARK: - Set up tableview  lensesToMain
     
@@ -65,17 +73,13 @@ class LensesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! lensTableViewCell
         cell.lensLabel?.text = lensKitArray[indexPath.row]
-        
         // Send switch state and indexpath ro to this func?
         cell.lensSwitch.tag = indexPath.row
         cell.lensSwitch.restorationIdentifier = lensKitArray[indexPath.row]
         cell.lensSwitch.addTarget(self, action: #selector(switchTriggered(sender:)), for: UIControlEvents.valueChanged)
-        
         return cell
-        
     }
     
     func switchTriggered(sender: UISwitch) {
@@ -85,7 +89,6 @@ class LensesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         print("Lens Switch Index: \(index) For: \(content) Is On: \(sender.isOn)")
         print("originalArray Size Is: \(originalArray.count) lensKitArray Size Is: \(lensKitArray.count)")
-        // dim row to grey
 
         // remove  element from Edited Array
         if sender.isOn != true {

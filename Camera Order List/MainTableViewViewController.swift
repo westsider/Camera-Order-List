@@ -59,8 +59,8 @@
 //  feat: Production info and weather report
 //  *** lens details Update UI,
 //  task: sequway to lens picker and segway back
-
 //  task edit lenses with switches and update array
+
 //  task: update tableview on main
 //  task: properly dispose old view controllers
 //  *** Navigation not properly desptroying views
@@ -71,6 +71,14 @@
 //  **** After all of the app is working finish adding all of the equipment
 
 import UIKit
+
+var thisEvent: Event!   //  ? = nil until View Did Load global until core data
+
+var thisCompState = [Int]()
+
+var equipment = [String]()
+
+var tableViewArray = [[String]]()
 
 class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource {
     
@@ -83,19 +91,21 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     var localPickerIndex = setPickerArray(component: 0, row: 0, lastCatagory: 0)
     
-    var equipment = [String]()
+    //var equipment = [String]()
     
     var defaultUser = User(name: "Warren Hansen", production: "Nike", company: "CO3", city: "SantaMonica", date: "12 / 20 / 2016", weather: "Sunny 72", icon: UIImage(named: "manIcon")!)
     
     var image = [UIImage]()
     
-    var thisEvent: Event!   //  ? = nil until View Did Load
+    //  var thisEvent: Event!   //  ? = nil until View Did Load
     
-    var tableViewArray = [[String]]()
+    // var tableViewArray = [[String]]()
     
     let cellIdentifier = "ListTableViewCell"
     
     var lenskit = [String]()
+    
+   // var thisCompState = [Int]()
     
     // MARK: - Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
@@ -109,6 +119,8 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         // populate tabbleViewArray with User
         tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1))
+        
+        myTableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -118,14 +130,13 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         self.myPicker.delegate = self
     }
     
+    
     // MARK: Save / Add Action
     @IBAction func saveAddAction(_ sender: Any) {
         
         //performSegue(withIdentifier: "MainToPastOrders", sender: self)
         
     }
-    
-    
     
     // MARK: - Set up Picker
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -203,7 +214,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         let comp2 = localPickerIndex[2][myPicker.selectedRow(inComponent: 2)]
         let comp3 = localPickerIndex[3][myPicker.selectedRow(inComponent: 3)]
         // set up the picker component component state array
-        let thisCompState = [myPicker.selectedRow(inComponent: 0),myPicker.selectedRow(inComponent: 1),myPicker.selectedRow(inComponent: 2),myPicker.selectedRow(inComponent: 3)]
+        thisCompState = [myPicker.selectedRow(inComponent: 0),myPicker.selectedRow(inComponent: 1),myPicker.selectedRow(inComponent: 2),myPicker.selectedRow(inComponent: 3)]
         // find which lens kit goes with this state
         lenskit = setPrimesKit(compState: thisCompState)// unknown kit
         print("Primes Selected: \(lenskit)")
@@ -226,15 +237,11 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             // segue mainToLenses
             //performSegue(withIdentifier: "MainToPastOrders", sender: self)
             performSegue(withIdentifier: "mainToLenses", sender: self)
-            
-            
-            
-            
-            
+ 
         }
         
         // else update array
-        self.thisEvent.addEquipment(comp2: myPicker.selectedRow(inComponent: 1), equip: equipment)
+        thisEvent.addEquipment(comp2: myPicker.selectedRow(inComponent: 1), equip: equipment)
         tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1) )
         
         myTableView.reloadData()
