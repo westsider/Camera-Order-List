@@ -74,9 +74,9 @@ import UIKit
 
 var thisEvent: Event!   //  ? = nil until View Did Load global until core data
 
-//var thisCompState = [Int]()
+// var thisCompState = [Int]()
 
-var equipment = [String]()
+// var equipment = [String]()
 
 //  var tableViewArray = [[String]]()
 
@@ -103,7 +103,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     // MARK: - Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
         //  populate Event before view appears
-        thisEvent = Event(eventName: "Passed In Current", user: defaultUser, equipment: [equipment], images: image)
+        thisEvent = Event(eventName: "Passed In Current", user: defaultUser, equipment: [myEquipment.equipment], images: image)
         thisEvent.images.append(thisEvent.user.icon)
         
         // populate eaquipment and tableView array before view appears
@@ -215,8 +215,8 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         print("Primes Selected: \(myEquipment.lenskit)")
         
         // populate the array for label verification and addition to the event
-        equipment = [comp0, comp1, comp2, comp3, myEquipment.lenskit.joined()]
-        print("Equipment array now includes lens kit: \(equipment)")
+        myEquipment.equipment = [comp0, comp1, comp2, comp3, myEquipment.lenskit.joined()]
+        print("Equipment array now includes lens kit: \(myEquipment.equipment)")
     }
     
     
@@ -231,7 +231,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
         
         // else update array
-        thisEvent.addEquipment(comp2: myPicker.selectedRow(inComponent: 1), equip: equipment)
+        thisEvent.addEquipment(comp2: myPicker.selectedRow(inComponent: 1), equip: myEquipment.equipment)
         myEquipment.tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1) )
         myTableView.reloadData()
         print("func addEquipmentAction exiting with: \(thisEvent.equipment)\n")

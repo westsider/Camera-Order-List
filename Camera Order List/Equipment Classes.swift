@@ -186,10 +186,10 @@ func setPrimesKit(compState: Array<Int>)-> [String] {
 //  task: add tableview array  to  equipmentObject
 //  task: add lens kit array to equipmentObject
 //  task: add thisCompState = [Int]() to equipmentObject
-
 //  task: add equipment = [String]() to equipmentObject
+
 //  now i have only 1 object to persist
-//  task: make the equipmentObject global until I can persist
+
 //  task: pass the edited lens kit back to the main VC
 
 struct equipmentObject {
@@ -199,6 +199,7 @@ struct equipmentObject {
     var tableViewArray = [[String]]()
     var lenskit = [String]()
     var thisCompState = [Int]()
+    var equipment = [String]()
     
      mutating func setPickerArray(component: Int, row: Int, lastCatagory: Int )   {
 
