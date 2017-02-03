@@ -109,11 +109,6 @@ func setProbeModel(maker: MakerProbe) -> [String] {
     }
 }
 
-// add btn is pressed - get picker state and pass that into this func
-//  when comp 1 = row 1, comp 2 = row 0, comp 3 = 0
-//  what i need to get looks like nil, 1, 0, 0
-//  find picker state
-//  funcSetPrimesKit((comp2: 1, equip: e1) -  this will populate the lensTableview to "Zeiss", "Master Primes", "12mm, 18mm, 21mm, 35mm, 40mm, 50mm" ect
 func setPrimesKit(compState: Array<Int>)-> [String] {
     // Zeiss Prime Section
     var primes = ["I dont know what this is"]
@@ -201,21 +196,12 @@ struct equipmentObject {
         
         let tableViewRow = myEquipment.tableViewArray.count - 1
         print("myEquipment.tableViewArray.count \(tableViewRow)")
-        
-        //  print("\ntableViewArray 0: \(tableViewArray[0])\n")
-        //  print("\ntableViewArray 1: \(tableViewArray[1])\n")
         print("\ntableViewArray 1, 2: \(myEquipment.tableViewArray[tableViewRow][2])\n")
         
         myEquipment.tableViewArray[tableViewRow][2] = update
         
         print("\ntableViewArray 1, 2: \(myEquipment.tableViewArray[tableViewRow][2])\n")
-        
         youShoudSeeThis(say: "myEquipment.tableViewArray:", see: myEquipment.tableViewArray as AnyObject)
-    // how to I count the lelments in tableViewArray?
-        
-        
-        
-        // neeed a print statremnt that hows me hjow this array is structured so I can update just the kit
     }
     // myEquipment.equipment[4]
     
@@ -455,9 +441,8 @@ class Event {
             if  counter > 0  && ( equipment[counter][1] == "Primes" || equipment[counter][1] == "Macros" || equipment[counter][1] == "AKS"  || equipment[counter][1] == "Filters" || equipment[counter][1] == "Support" || equipment[counter][1] == "Probe Lens" )
             {
                 titleArray.append("\(equipment[counter][0]) \(equipment[counter][1]) \(equipment[counter][2]) \(equipment[counter][3])")
-               // detailArray.append("Lenses Go Here")
-               //  detailArray.append(equipment[counter][4])
-                // here is where I add the edited prime lens kit
+                // edit prime lens kit
+// a bug here replaces prior tableview array detail of lens kit
                 detailArray.append(myEquipment.equipment[4])
             }
             
@@ -491,6 +476,7 @@ class Event {
     }
 }
 
+/// print statement to examime objects
 func youShoudSeeThis(say: String, see: AnyObject ) {
     
     print("\n\(say) \(see)")

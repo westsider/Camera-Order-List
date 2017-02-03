@@ -114,19 +114,11 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         } else {
             
             youShoudSeeThis(say: "Returning to Main View - viewWillAppear -  TableviewArray", see: myEquipment.tableViewArray as AnyObject)
-            
             // populate eaquipment and tableView array before view appears
             populateEquipmentArray(component: 0, row: 0)
-            
-            // populate tabbleViewArray with User - did this in lenses VC
-            //myEquipment.tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1))
-            
-            //  myEquipment.setPickerArray(component: 0, row: 0, lastCatagory: 0)
-            
             youShoudSeeThis(say: "After Update - viewWillAppear -  TableviewArray", see: myEquipment.tableViewArray as AnyObject)
         }
        
-        
         myTableView.reloadData()
     }
     
@@ -212,7 +204,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     // MARK: - TableView Convience Functions
-    // create an array of equipment from picker
+    /// create an array of equipment from picker wheel settings
     func populateEquipmentArray(component: Int, row: Int) {
         
         // find which rows are selected in each component
@@ -241,31 +233,21 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         // if this is a prime lens - segue to lenses - pass lens kit array  - edit array with switches - pass lens kit aray back to main
         if myPicker.selectedRow(inComponent: 1) == 1 {
-            // update equipment and event
-//            thisEvent.addEquipment(comp2: myPicker.selectedRow(inComponent: 1), equip: myEquipment.equipment)
-//            myEquipment.tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1) )
             // segue mainToLenses
             performSegue(withIdentifier: "mainToLenses", sender: self)
  
         }
         
-        // else update array
-        
+        // otherwise update the equipment and tableView arrays
         thisEvent.addEquipment(comp2: myPicker.selectedRow(inComponent: 1), equip: myEquipment.equipment)
-        
         myEquipment.tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1) )
-        
-        
-        
         myTableView.reloadData()
-            //  print("func addEquipmentAction exiting with: \(thisEvent.equipment)\n")
-        
     }
     
     // unused button to test thisEvent.editLensArray
     
     // MARK: - Picker Convience Functions
-    // MARK: - call a reload on text in picker UI  depending on the component switched
+    /// reload the text in picker depending on the component switched
     func reloadComponentsAndText(component: Int, row: Int) {
         
         switch component {  // reload only the next picker when prior wheel moves
@@ -283,7 +265,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
     }
     
-    //  dont reload localPickerIndex when component 0 or 3 move
+    ///  dont reload localPickerIndex when component 0 or 3 move
     func dontReloadOnComp0or3(component: Int, row: Int, lastCatagory: Int) {
         
         if component == 1 || component == 2 {     //  full update on comp 1 and 2 only
@@ -292,7 +274,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
     }
     
-    // zero the picker wheels when Catagory changes
+    /// zero the picker wheels when Catagory changes
     func zeroThePicker(component: Int, row: Int){
         if component == 1 {  // with new catagory set wheel 2 and 3 safely to index 0
             myPicker.selectRow(0, inComponent: 2, animated: true)
@@ -313,12 +295,6 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             controller.defaultUser = defaultUser
                 //  print("Segue with default user to Users VC")
         }
-        
-//        if segue.identifier == "mainToLenses" {
-//            let controller = segue.destination as! LensesViewController
-//            controller.lensKitArray = myEquipment.lenskit
-//            
-//        }
     }
 }
 

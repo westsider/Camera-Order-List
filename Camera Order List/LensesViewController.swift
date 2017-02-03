@@ -12,8 +12,9 @@
 //  correct why navigation is incorrect
 //  task: edit tableview array with new lens kit
 
-//  tasl: write function and object definitions
-//  task: add all other lenses
+//  bug: summicron-c reloads entire picker array
+//  task: write function and object definitions
+//  task: finish other lens kits
 //  task: figure out why main is wiping out tableview array
 //  task: add segue to lens selection
 //  task: add button / segue back to main
@@ -45,6 +46,7 @@ class LensesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         youShoudSeeThis(say: "****** viewWillAppear for Lenses - tableViewArray :", see: myEquipment.tableViewArray as AnyObject)
     }
     
+    //MARK: - Update the lens kit and return to main VC
     @IBAction func updateAction(_ sender: Any) {
         
         // not getting the edited lens package back
@@ -59,37 +61,14 @@ class LensesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // this will update the equipment but not the tableview array
         myEquipment.updateLensKit(update: lensKitArrayEdited.joined(separator: ", "))
         
-//  thisEvent.addEquipment(comp2: myEquipment.thisCompState[1], equip: myEquipment.equipment)
         // update the tableview
         myEquipment.tableViewArray = thisEvent.populateTableview(catagory:  myEquipment.thisCompState[1] )
         
         _ = navigationController?.popToRootViewController(animated: true)
         
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "lensesToMain" {
-//            //let controller = segue.destination as! MainTableViewController
-//            // update lens kit
-//            //controller.lenskit = lensKitArrayEdited no longer cotroller item - global item
-//            
-//    //myEquipment.lenskit = lensKitArrayEdited
-//            //  update Event
-//    //thisEvent.addEquipment(comp2: myEquipment.thisCompState[1], equip: myEquipment.equipment)
-//            //thisEvent.addEquipment(comp2: myPicker.selectedRow(inComponent: 1), equip: myEquipment.equipment)
-//            // update table view array
-//    // myEquipment.tableViewArray = thisEvent.populateTableview(catagory: myEquipment.thisCompState[1])
-//            //myEquipment.tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1) )
-//            print("This is the array for tableView in Lensen after editing: \(myEquipment.tableViewArray)\n")
-//            print("Segue with new lens kit to Main VC")
-//            
-//            
-//            
-//        }
-//    }
 
     // MARK: - Set up tableview  lensesToMain
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         // return lensKitArray.count
@@ -106,14 +85,13 @@ class LensesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
+    /// logic to modify a lens kit from swich positions in the lens kit tableView
     func switchTriggered(sender: UISwitch) {
         
         let index = sender.tag
         let content = sender.restorationIdentifier!
         
         print("Lens Switch Index: \(index) For: \(content) Is On: \(sender.isOn)")
-     
-// bug here, we end up losing the last element
         
         // remove  element from Edited Array
         if sender.isOn != true {
@@ -128,6 +106,4 @@ class LensesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         print("\noriginalArray Size Is: \(originalArray.count) lensKitArrayEdited Size Is: \(lensKitArrayEdited.count)\n")
     }
-
-
 }
