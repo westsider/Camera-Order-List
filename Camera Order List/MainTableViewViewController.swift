@@ -89,28 +89,19 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     // MARK - Decalare User array and Event
     var prevCatagory = 0
     
-    var localPickerIndex = setPickerArray(component: 0, row: 0, lastCatagory: 0)
-    
-    //var equipment = [String]()
+    var myEquipment = equipmentObject()
     
     var defaultUser = User(name: "Warren Hansen", production: "Nike", company: "CO3", city: "SantaMonica", date: "12 / 20 / 2016", weather: "Sunny 72", icon: UIImage(named: "manIcon")!)
     
     var image = [UIImage]()
     
-    //  var thisEvent: Event!   //  ? = nil until View Did Load
-    
-    // var tableViewArray = [[String]]()
-    
     let cellIdentifier = "ListTableViewCell"
     
     var lenskit = [String]()
     
-   // var thisCompState = [Int]()
-    
     // MARK: - Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
         //  populate Event before view appears
-        //thisEvent = Event(user: defaultUser, equipment: [equipment], images: image)
         thisEvent = Event(eventName: "Passed In Current", user: defaultUser, equipment: [equipment], images: image)
         thisEvent.images.append(thisEvent.user.icon)
         
@@ -119,6 +110,8 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         // populate tabbleViewArray with User
         tableViewArray = thisEvent.populateTableview(catagory:  myPicker.selectedRow(inComponent: 1))
+        
+        myEquipment.setPickerArray(component: 0, row: 0, lastCatagory: 0)
         
         myTableView.reloadData()
     }
@@ -145,12 +138,12 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     // The number of rows of data
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return localPickerIndex[component].count
+        return  myEquipment.pickerArray[component].count //localPickerIndex[component].count
     }
     
     // The data to return for the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return localPickerIndex[component][row]
+        return  myEquipment.pickerArray[component][row] //localPickerIndex[component][row]
     }
     
     // MARK: - when picker wheels move change the pickerArray and reload
@@ -172,7 +165,7 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         pickerLabel.textColor = UIColor.black
-        pickerLabel.text = localPickerIndex[component][row]
+        pickerLabel.text = myEquipment.pickerArray[component][row]  // localPickerIndex[component][row]
         pickerLabel.font = UIFont(name: "Helvetica", size: 18) // In this use your custom font
         pickerLabel.textAlignment = NSTextAlignment.center
         pickerLabel.adjustsFontSizeToFitWidth = true
@@ -209,10 +202,10 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     func populateEquipmentArray(component: Int, row: Int) {
         
         // find which rows are selected in each component
-        let comp0 = localPickerIndex[0][myPicker.selectedRow(inComponent: 0)]
-        let comp1 = localPickerIndex[1][myPicker.selectedRow(inComponent: 1)]
-        let comp2 = localPickerIndex[2][myPicker.selectedRow(inComponent: 2)]
-        let comp3 = localPickerIndex[3][myPicker.selectedRow(inComponent: 3)]
+        let comp0 = myEquipment.pickerArray[0][myPicker.selectedRow(inComponent: 0)]
+        let comp1 =  myEquipment.pickerArray[1][myPicker.selectedRow(inComponent: 1)]
+        let comp2 = myEquipment.pickerArray[2][myPicker.selectedRow(inComponent: 2)]
+        let comp3 = myEquipment.pickerArray[3][myPicker.selectedRow(inComponent: 3)]
         // set up the picker component component state array
         thisCompState = [myPicker.selectedRow(inComponent: 0),myPicker.selectedRow(inComponent: 1),myPicker.selectedRow(inComponent: 2),myPicker.selectedRow(inComponent: 3)]
         // find which lens kit goes with this state
@@ -220,12 +213,8 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         print("Primes Selected: \(lenskit)")
         
         // populate the array for label verification and addition to the event
-        //equipment = [comp0, comp1, comp2, comp3, lenskit]
         equipment = [comp0, comp1, comp2, comp3, lenskit.joined()]
-        
         print("Equipment array now includes lens kit: \(equipment)")
-        
-        
     }
     
     
@@ -235,7 +224,6 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         // if this is a prime lens - segue to lenses - pass lens kit array  - edit array with switches - pass lens kit aray back to main
         if myPicker.selectedRow(inComponent: 1) == 1 {
             // segue mainToLenses
-            //performSegue(withIdentifier: "MainToPastOrders", sender: self)
             performSegue(withIdentifier: "mainToLenses", sender: self)
  
         }
@@ -272,7 +260,8 @@ class MainTableViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     func dontReloadOnComp0or3(component: Int, row: Int, lastCatagory: Int) {
         
         if component == 1 || component == 2 {     //  full update on comp 1 and 2 only
-            localPickerIndex = setPickerArray(component: component, row: row, lastCatagory: prevCatagory)
+            
+            myEquipment.setPickerArray(component: component, row: row, lastCatagory: prevCatagory)
         }
     }
     
